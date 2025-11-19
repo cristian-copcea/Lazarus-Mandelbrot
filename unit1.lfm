@@ -1,12 +1,12 @@
 object Form1: TForm1
-  Left = 173
-  Height = 979
-  Top = 312
-  Width = 1909
+  Left = 196
+  Height = 1012
+  Top = 514
+  Width = 1622
   ActiveControl = Edit1
   Caption = 'Fractals'
-  ClientHeight = 979
-  ClientWidth = 1909
+  ClientHeight = 1012
+  ClientWidth = 1622
   DefaultMonitor = dmMainForm
   DesignTimePPI = 192
   Position = poMainFormCenter
@@ -15,28 +15,28 @@ object Form1: TForm1
   OnCreate = FormCreate
   object Panel2: TPanel
     Left = 0
-    Height = 979
+    Height = 1012
     Top = 0
-    Width = 1299
+    Width = 1012
     Align = alClient
     AutoSize = True
     BevelInner = bvLowered
     BorderStyle = bsSingle
-    ClientHeight = 975
-    ClientWidth = 1295
+    ClientHeight = 1008
+    ClientWidth = 1008
     TabOrder = 0
     object ScrollBox1: TScrollBox
       Left = 2
-      Height = 971
+      Height = 1004
       Top = 2
-      Width = 1291
+      Width = 1004
       HorzScrollBar.Increment = 23
       HorzScrollBar.Page = 668
       VertScrollBar.Increment = 22
       VertScrollBar.Page = 464
       Align = alClient
-      ClientHeight = 967
-      ClientWidth = 1287
+      ClientHeight = 1000
+      ClientWidth = 1000
       TabOrder = 0
       object Image1: TImage
         Left = 0
@@ -68,9 +68,9 @@ object Form1: TForm1
         OnResize = Image2Resize
       end
       object Shape1: TShape
-        Left = 358
+        Left = 251
         Height = 206
-        Top = 403
+        Top = 420
         Width = 240
         Anchors = []
         Brush.Color = clNone
@@ -87,24 +87,24 @@ object Form1: TForm1
     end
   end
   object Panel3: TPanel
-    Left = 1299
-    Height = 979
+    Left = 1012
+    Height = 1012
     Top = 0
     Width = 610
     Align = alRight
     BevelInner = bvLowered
     BorderStyle = bsSingle
-    ClientHeight = 975
+    ClientHeight = 1008
     ClientWidth = 606
     TabOrder = 1
     object Panel4: TPanel
       Left = 2
-      Height = 971
+      Height = 1004
       Top = 2
       Width = 602
       Align = alClient
       BevelInner = bvRaised
-      ClientHeight = 971
+      ClientHeight = 1004
       ClientWidth = 602
       TabOrder = 0
       object Panel5: TPanel
