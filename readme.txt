@@ -70,8 +70,17 @@ On the right side of the screen, a number of parameters are displayed while movi
 
 C variables may have LOTS of fraction digits, which cannot be displayed entirely, so only a number of fraction digits are displayed, but all digits are displayed if you hover with the mouse over the values.
 
-Those vales not displaying this hint could be displayed entirely and thus the hint was made obsolete/not displayed.
+Those values not displaying this hint could be displayed entirely and thus the hint was made obsolete/not displayed.
 
+---
+
+Multithreading, again
+
+It is nice to spawn threads, lots of it.
+And then, close them in a nicer manner, to avoid memory leaks.
+Read docs on Google and see how they are created/destroyed in these source files.
+
+The trick with these images created for Mandelbrot/Julia renders, is to divide the images in smaller ones, chinks of images, render them in parallel and finally assembling the whole stuff in the final image.
 ---------
 Netflix is nice
 
