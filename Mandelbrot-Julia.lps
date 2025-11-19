@@ -84,7 +84,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="328"/>
+        <TopLine Value="329"/>
         <CursorPos X="84" Y="380"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
