@@ -58,7 +58,6 @@
           <Linking>
             <Debugging>
               <GenerateDebugInfo Value="False"/>
-              <RunWithoutDebug Value="True"/>
               <DebugInfoType Value="dsDwarf3"/>
               <StripSymbols Value="True"/>
             </Debugging>
@@ -85,7 +84,7 @@
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="329"/>
-        <CursorPos X="84" Y="380"/>
+        <CursorPos X="40" Y="374"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
@@ -106,7 +105,7 @@
         <UnitName Value="Unit2"/>
         <EditorIndex Value="1"/>
         <CursorPos X="81" Y="18"/>
-        <UsageCount Value="72"/>
+        <UsageCount Value="73"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -240,9 +239,6 @@
     </Units>
     <Debugger>
       <Backend Value="{2DEF1EA0-3C6F-4D8B-976C-3CA1417A66CF}"/>
-      <ClassConfig Version="1">
-        <Config ConfigName="New" ConfigClass="TGDBMIDebugger" Active="True" UID="{4FD4556C-F091-40CE-B23F-4313A57D46FF}"/>
-      </ClassConfig>
     </Debugger>
     <JumpHistory HistoryIndex="29">
       <Position>
@@ -464,7 +460,6 @@
       </Item>
       <Item>
         <Expression Value="button"/>
-        <DisplayFormat ENumInherit="False" Enum="vdfEnumNameAndOrd"/>
       </Item>
       <Item>
         <Expression Value="pixelheight"/>

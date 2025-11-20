@@ -65,9 +65,6 @@
         <UnitName Value="Unit2"/>
       </Unit>
     </Units>
-    <Debugger>
-      <StoreDebuggerClassConfInSession Value="True"/>
-    </Debugger>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="11"/>
