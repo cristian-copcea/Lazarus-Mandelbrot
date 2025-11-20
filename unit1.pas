@@ -581,7 +581,7 @@ begin
   try
   if Paramcount<>0 then
   begin
-    if (StrToInt(paramstr(1)) <= 4*CPU) and
+    if (StrToInt(paramstr(1)) <= 2*(CPU+2)) and
        (StrToInt(paramstr(1)) <> 0) then
            CPU:=StrToInt(paramstr(1));
   end;

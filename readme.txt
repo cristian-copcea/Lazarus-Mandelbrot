@@ -81,6 +81,42 @@ And then, close them in a nicer manner, to avoid memory leaks.
 Read docs on Google and see how they are created/destroyed in these source files.
 
 The trick with these images created for Mandelbrot/Julia renders, is to divide the images in smaller ones, chinks of images, render them in parallel and finally assembling the whole stuff in the final image.
+
+LE: did a series of executions with several number of threads on a default Mandelbrot set (1000x1000 px) @200000 iterations, with several thread numbers.
+
+The results, on a i7/11th gen with 8 cores/16 logical processors:
+
+Threads #	Render time
+8		26 sec
+10		23 sec
+12		20 sec
+14		19 sec
+16		18 sec
+18		17 sec
+20		16 sec
+22		15 sec
+24		16 sec
+26		16 sec
+28		15 sec
+30		16 sec
+32		16 sec
+34		16 sec
+36		17 sec
+38		17 sec
+40		18 sec
+44		19 sec
+48		20 sec
+52		22 sec
+56		24 sec
+60		26 sec
+70		30 sec
+80		39 sec
+
+So there is an ideal of 28 threads to compute the image in the least of time. Why 28, when the CPU has 8 Phy cores/16 logical cores?
+
+When rendering that default Mandelbrot set, the "heart" size is ~ 25% of the image width. Since all the other slices of the image are rendered quite fast, there is this 25% of the image being processed at the end by 25% of the CPUS, meaning ~7 cores in the case of 28 threads, which is very close to the number of physical cores available.
+
+Since Lazarus does not differentiate between Physical and logical cores, I have set the upper limit to 200% of the total CPU number, where an ideal speed should be obtained at 150% threads of the total cores in the system.
 ---------
 Netflix is nice
 
