@@ -176,6 +176,7 @@ end;
     SaveDialog1: TSaveDialog;
     ScrollBox1: TScrollBox;
     Shape1: TShape;
+    Timer1: TTimer;
     UpDown1: TUpDown;
     procedure Action1Execute(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
@@ -203,6 +204,7 @@ end;
     procedure RadioGroup1SelectionChanged(Sender: TObject);
     procedure RadioGroup2SelectionChanged(Sender: TObject);
     procedure SaveDialog1TypeChange(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
     procedure UpDown1ChangingEx(Sender: TObject; var AllowChange: Boolean;
       NewValue: SmallInt; Direction: TUpDownDirection);
 
@@ -227,7 +229,8 @@ end;
   MandelProgress: array of TProgressbar;
   MThreads : array of TMyMandelbrotThread;
   Mzoom: extended;
-
+  StartTime, StopTime: TDateTime;
+  TimerSet: (J,M);
   //Julia
   zoom, moveX, moveY: extended;
   jcx, jcy: extended;
@@ -509,8 +512,9 @@ begin
         else
            Form2.SaveImage.Canvas.CopyRect(Rect(Amyixmin,1,Amyixmax,Amyiymax),ABitmap.Canvas,Rect(1,1,Amyixmax-Amyixmin,Amyiymax));
         ProgressBar2.Position:=ProgressBar2.Position+1;
+        Form1.StopTime:=now;
         Label31.Font.Color:=clWhite - ColorToRGB(Image1.canvas.Pixels[10,10]);
-        Label31.Caption:='Rendering Mandelbrot set: '+FloatToStrF(ProgressBar2.Position*100/ProgressBar2.Max,ffNumber,3,2)+'%';
+        Label31.Caption:='Rendering Mandelbrot set: '+FloatToStrF(ProgressBar2.Position*100/ProgressBar2.Max,ffNumber,3,2)+'%; Time: '+ FormatDateTime('h"h "n"m "s"s"', Form1.StopTime-Form1.StartTime);
         ProgressBar2.Hint:=Label31.Caption;
         if ProgressBar2.Position=ProgressBar2.Max then
         begin
@@ -532,9 +536,10 @@ begin
         else
           Form2.SaveImage.Canvas.CopyRect(Rect(Amyixmin,1,Amyixmax,Amyiymax),ABitmap.Canvas,Rect(1,1,Amyixmax-Amyixmin,Amyiymax));
           ProgressBar1.Position:=ProgressBar1.Position+1;
+          Form1.StopTime:=now;
           Label31.Font.Color:=clWhite - ColorToRGB(Image2.canvas.Pixels[10,10]);
-          Label31.Caption:='Rendering Julia set: '+FloatToStrF(ProgressBar1.Position*100/ProgressBar1.Max,ffNumber,3,2)+'%';
-          ProgressBar1.Hint:=Label31.Caption;;
+          Label31.Caption:='Rendering Julia set: '+FloatToStrF(ProgressBar1.Position*100/ProgressBar1.Max,ffNumber,3,2)+'%; Time: '+ FormatDateTime('h"h "n"m "s"s"', Form1.StopTime-Form1.StartTime);
+          ProgressBar1.Hint:=Label31.Caption;
           if ProgressBar1.Position=ProgressBar1.Max then
                 begin
                         EnableAllControls;
@@ -547,19 +552,23 @@ begin
 end;
 procedure TForm1.EnableAllControls;
 begin
+   Form1.BorderIcons:=[biMaximize, biMinimize, biSystemMenu];
    RadioGroup1.Enabled:=true;
    Edit1.Enabled:=true;
    UpDown1.Enabled:=true;
    BitBtn2.Enabled:=true;
    BitBtn3.Enabled:=true;
+   Timer1.Enabled:=false;
 end;
 procedure TForm1.DisableAllControls;
 begin
+  Form1.BorderIcons:=[biSystemMenu];
   RadioGroup1.Enabled:=false;
   Edit1.Enabled:=false;
   UpDown1.Enabled:=false;
   BitBtn2.Enabled:=false;
   BitBtn3.Enabled:=false;
+  Timer1.Enabled:=true;
 end;
 procedure TForm1.FormCreate(Sender: TObject);
 var
@@ -1058,6 +1067,26 @@ begin
   SaveDialog1.DefaultExt := sa[index];
 end;
 
+procedure TForm1.Timer1Timer(Sender: TObject);
+begin
+  case Timerset of
+    J:
+    begin
+      StopTime:=now;
+      Label31.Font.Color:=clWhite - ColorToRGB(Image2.canvas.Pixels[10,10]);
+      Label31.Caption:='Rendering Julia set: '+FloatToStrF(ProgressBar1.Position*100/ProgressBar1.Max,ffNumber,3,2)+'%; Time: '+ FormatDateTime('h"h "n"m "s"s"', Form1.StopTime-Form1.StartTime);
+      ProgressBar1.Hint:=Label31.Caption;
+    end;
+    M:
+    begin
+      StopTime:=now;
+      Label31.Font.Color:=clWhite - ColorToRGB(Image1.canvas.Pixels[10,10]);
+      Label31.Caption:='Rendering Mandelbrot set: '+FloatToStrF(ProgressBar2.Position*100/ProgressBar2.Max,ffNumber,3,2)+'%; Time: '+ FormatDateTime('h"h "n"m "s"s"', Form1.StopTime-Form1.StartTime);
+      ProgressBar2.Hint:=Label31.Caption;
+    end;
+  end;
+end;
+
 
 
 procedure TForm1.UpDown1ChangingEx(Sender: TObject; var AllowChange: Boolean;
@@ -1104,6 +1133,7 @@ procedure TForm1.BitBtn2Click(Sender: TObject);
 var
   i:integer;
 begin
+  StartTime:=now;
   DisableAllControls;
   ThreadsDone:=False;
   if (Sender<>Nil) then
@@ -1127,7 +1157,7 @@ begin
       begin
           Juliaprogress[i].Position:=0;
       end;
-
+      TimerSet:=J;
       for i:=Low(JThreads) to High(JThreads)  do
       begin
          JThreads[i]:=TMyJuliaThread.Create(False, i);
@@ -1144,7 +1174,7 @@ begin
       begin
           Mandelprogress[i].Position:=0;
       end;
-
+      TimerSet:=M;
       for i:=Low(MThreads) to High(MThreads)  do
       begin
          MThreads[i]:=TMyMandelbrotThread.Create(False, i);
@@ -1165,8 +1195,8 @@ var
   Jpg: TJPEGImage;
   oldixmax, oldiymax: integer;
 begin
-  Form1.BorderIcons:=[];
   DisableAllControls;
+  Form1.BorderIcons:=[];
   Jpg := TJPEGImage.Create;
   Saving:=true;
   if Image1.Visible=True then
@@ -1296,7 +1326,6 @@ begin
   end;
   Jpg.Free;
   Saving:=false;
-  Form1.BorderIcons:=[biMaximize, biMinimize, biSystemMenu];
   EnableAllControls;
 end;
 

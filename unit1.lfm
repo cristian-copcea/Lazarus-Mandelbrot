@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 1450
+  Left = 1226
   Height = 759
-  Top = 1075
+  Top = 246
   Width = 1216
   ActiveControl = Edit1
   Caption = 'Fractals'
@@ -130,7 +130,8 @@ object Form1: TForm1
           Height = 12
           Hint = 'Total render progress'
           Top = 308
-          Width = 436
+          Width = 438
+          Align = alBottom
           Max = 10
           ParentShowHint = False
           ShowHint = True
@@ -705,5 +706,11 @@ object Form1: TForm1
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
     Left = 269
     Top = 108
+  end
+  object Timer1: TTimer
+    Enabled = False
+    OnTimer = Timer1Timer
+    Left = 312
+    Top = 24
   end
 end
