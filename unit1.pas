@@ -9,6 +9,33 @@ uses
   StdCtrls, ComCtrls, LCLIntf, LCLType, ActnList, Menus, Math, Types, unit2 ;
 
 type
+TMInitParam = record
+    CPU:           integer  ;
+    Fcxmin:        extended ;
+    Fcxmax:        extended ;
+    Fcymin:        extended ;
+    Fcymax:        extended ;
+    Fixmax:        int64    ;
+    Fiymax:        int64    ;
+    SaveZoom:      integer  ;
+    Pallette:      integer  ;
+    MaxIterations: integer  ;
+end;
+
+TJInitParam = record
+    CPU:               integer;
+    SaveZoom:          integer;
+    Fixmax:            int64;
+    Fiymax:            int64;
+    jcx:               extended;
+    jcy:               extended;
+    zoom:              extended;
+    MoveX:             extended;
+    MoveY:             extended;
+    jmaxiterations:    integer;
+    Pallette:          integer;
+end;
+
 
 
   { TMyMandelbrotThread }
@@ -18,46 +45,40 @@ type
     procedure DoMandelBrot(ParamThreadNumber: integer);
 
   private
-    fCPU:integer;
     fix, fiy, fcolor: int64;
     fThreadNumber:integer;
     fmyixmin, fmyixmax, fmyiymin, fmyiymax: int64;
     MyImage: TBitmap;
-    fFcxmin: extended;
-    fFcxmax: extended;
-    fFcymin: extended;
-    fFcymax: extended;
-    fFixmax:int64;
-    fFiymax:int64;
-    fSaveZoom: integer;
+    fMInitParam: TMInitParam;
     fForceTerminate: boolean;
-    fPallette: integer;
     procedure CopyImage;
     procedure ShowStatusY;
 
   protected
     procedure Execute; override;
   public
-    constructor Create(CreateSuspended: boolean; ParamThreadNumber:integer);
+    constructor Create(CreateSuspended: boolean; ParamThreadNumber:integer; MInitRecord:TMInitParam);
     procedure InitTerminate;
-    property CPU:           integer  read fCPU            write fCPU;
-    property ix:            int64    read fix             write fix;
-    property iy:            int64    read fiy             write fiy;
-    property myixmin:       int64    read fmyixmin        write fmyixmin;
-    property myixmax:       int64    read fmyixmax        write fmyixmax;
-    property myiymin:       int64    read fmyiymin        write fmyiymin;
-    property myiymax:       int64    read fmyiymax        write fmyiymax;
-    property color:         int64    read fcolor          write fcolor;
-    property ThreadNumber:  integer  read fThreadNumber   write fThreadNumber;
-    property Fcxmin:        extended read fFcxmin         write fFcxmin;
-    property Fcxmax:        extended read fFcxmax         write fFcxmax;
-    property Fcymin:        extended read fFcymin         write fFcymin;
-    property Fcymax:        extended read fFcymax         write fFcymax;
-    property Fixmax:        int64    read fFixmax         write fFixmax;
-    property Fiymax:        int64    read fFiymax         write fFiymax;
-    property SaveZoom:      integer  read fSaveZoom       write fSaveZoom;
-    property ForceTerminate:boolean  read fForceTerminate write fForceTerminate;
-    property Pallette: integer       read fPallette       write fPallette;
+    property CPU:           integer  read fMInitParam.CPU            write fMInitParam.CPU;
+    property Fcxmin:        extended read fMInitParam.Fcxmin         write fMInitParam.Fcxmin;
+    property Fcxmax:        extended read fMInitParam.Fcxmax         write fMInitParam.Fcxmax;
+    property Fcymin:        extended read fMInitParam.Fcymin         write fMInitParam.Fcymin;
+    property Fcymax:        extended read fMInitParam.Fcymax         write fMInitParam.Fcymax;
+    property Fixmax:        int64    read fMInitParam.Fixmax         write fMInitParam.Fixmax;
+    property Fiymax:        int64    read fMInitParam.Fiymax         write fMInitParam.Fiymax;
+    property MaxIterations: integer  read fMInitParam.MaxIterations  write fMInitParam.MaxIterations;
+    property SaveZoom:      integer  read fMInitParam.SaveZoom       write fMInitParam.SaveZoom;
+    property Pallette:      integer  read fMInitParam.Pallette       write fMInitParam.Pallette;
+    property ix:            int64    read fix                        write fix;
+    property iy:            int64    read fiy                        write fiy;
+    property myixmin:       int64    read fmyixmin                   write fmyixmin;
+    property myixmax:       int64    read fmyixmax                   write fmyixmax;
+    property myiymin:       int64    read fmyiymin                   write fmyiymin;
+    property myiymax:       int64    read fmyiymax                   write fmyiymax;
+    property color:         int64    read fcolor                     write fcolor;
+    property ThreadNumber:  integer  read fThreadNumber              write fThreadNumber;
+    property ForceTerminate:boolean  read fForceTerminate            write fForceTerminate;
+
 end;
 
 { TMyJuliaThread }
@@ -67,19 +88,12 @@ end;
     procedure DoJulia(ParamThreadNumber: integer);
 
   private
-    fCPU:integer;
+    fJInitParam: TJInitParam;
     fix, fiy, fcolor: int64;
-    fjcx, fjcy: extended;
-    fzoom, fMoveX, fMoveY : extended;
     fThreadNumber:integer;
     fmyixmin, fmyixmax, fmyiymin, fmyiymax: int64;
     MyImage: TBitmap;
-    fFixmax:int64;
-    fFiymax:int64;
-    fjmaxiterations:integer;
-    fSaveZoom: integer;
     fForceTerminate: boolean;
-    fPallette: integer;
 
     procedure CopyImage;
     procedure ShowStatusX;
@@ -88,28 +102,28 @@ end;
     procedure Execute; override;
 
   public
-    constructor Create(CreateSuspended: boolean; ParamThreadNumber:integer);
+    constructor Create(CreateSuspended: boolean; ParamThreadNumber:integer; JInitRecord:TJInitParam);
     procedure InitTerminate;
-    property CPU:           integer  read fCPU            write fCPU;
-    property ix:            int64    read fix             write fix;
-    property iy:            int64    read fiy             write fiy;
-    property jcx:           extended read fjcx            write fjcx;
-    property jcy:           extended read fjcy            write fjcy;
-    property zoom:          extended read fzoom           write fzoom;
-    property MoveX:         extended read fMoveX          write fMoveX;
-    property MoveY:         extended read fMoveY          write fMoveY;
-    property myixmin:       int64    read fmyixmin        write fmyixmin;
-    property myixmax:       int64    read fmyixmax        write fmyixmax;
-    property myiymin:       int64    read fmyiymin        write fmyiymin;
-    property myiymax:       int64    read fmyiymax        write fmyiymax;
-    property color:         int64    read fcolor          write fcolor;
-    property ThreadNumber:  integer  read fThreadNumber   write fThreadNumber;
-    property Fixmax:        int64    read fFixmax         write fFixmax;
-    property Fiymax:        int64    read fFiymax         write fFiymax;
-    property jmaxiterations:integer  read fjmaxiterations write fjmaxiterations;
-    property SaveZoom:      integer  read fSaveZoom       write fSaveZoom;
-    property ForceTerminate:boolean  read fForceTerminate write fForceTerminate;
-    property Pallette: integer       read fPallette       write fPallette;
+    property CPU:           integer  read fJInitParam.CPU            write fJInitParam.CPU;
+    property SaveZoom:      integer  read fJInitParam.SaveZoom       write fJInitParam.SaveZoom;
+    property Fixmax:        int64    read fJInitParam.Fixmax         write fJInitParam.Fixmax;
+    property Fiymax:        int64    read fJInitParam.Fiymax         write fJInitParam.Fiymax;
+    property jcx:           extended read fJInitParam.jcx            write fJInitParam.jcx;
+    property jcy:           extended read fJInitParam.jcy            write fJInitParam.jcy;
+    property zoom:          extended read fJInitParam.zoom           write fJInitParam.zoom;
+    property MoveX:         extended read fJInitParam.MoveX          write fJInitParam.MoveX;
+    property MoveY:         extended read fJInitParam.MoveY          write fJInitParam.MoveY;
+    property jmaxiterations:integer  read fJInitParam.jmaxiterations write fJInitParam.jmaxiterations;
+    property Pallette:      integer  read fJInitParam.Pallette       write fJInitParam.Pallette;
+    property ix:            int64    read fix                        write fix;
+    property iy:            int64    read fiy                        write fiy;
+    property myixmin:       int64    read fmyixmin                   write fmyixmin;
+    property myixmax:       int64    read fmyixmax                   write fmyixmax;
+    property myiymin:       int64    read fmyiymin                   write fmyiymin;
+    property myiymax:       int64    read fmyiymax                   write fmyiymax;
+    property color:         int64    read fcolor                     write fcolor;
+    property ThreadNumber:  integer  read fThreadNumber              write fThreadNumber;
+    property ForceTerminate:boolean  read fForceTerminate            write fForceTerminate;
   end;
 
   { TForm1 }
@@ -178,7 +192,6 @@ end;
     Shape1: TShape;
     Timer1: TTimer;
     UpDown1: TUpDown;
-    procedure Action1Execute(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
@@ -264,32 +277,25 @@ implementation
 
 { TMyMandelbrotThread }
 
-constructor TMyMandelbrotThread.Create(CreateSuspended: boolean; ParamThreadNumber:integer);
+constructor TMyMandelbrotThread.Create(CreateSuspended: boolean; ParamThreadNumber:integer; MInitRecord:TMInitParam);
 begin
-  Self.ThreadNumber:=ParamThreadNumber;
-  Self.ForceTerminate:=false;;
+  Self.CPU           := MInitRecord.CPU;
+  Self.Fcxmin        := MInitRecord.Fcxmin;
+  Self.Fcxmax        := MInitRecord.Fcxmax;
+  Self.Fcymin        := MInitRecord.Fcymin;
+  Self.Fcymax        := MInitRecord.Fcymax;
+  Self.Fixmax        := MInitRecord.Fixmax;
+  Self.Fiymax        := MInitRecord.Fiymax;
+  Self.Fiymax        := MInitRecord.Fiymax;
+  Self.MaxIterations := MInitRecord.MaxIterations;
+  Self.Pallette      := MInitRecord.Pallette;
+  Self.ThreadNumber  :=ParamThreadNumber;
+  Self.ForceTerminate:=false;
   inherited Create(CreateSuspended);
 end;
 
 procedure TMyMandelbrotThread.Execute;
 begin
-  Self.CPU:=Form1.CPU;
-  Self.Fcxmin:=Form1.cxmin;
-  Self.Fcxmax:=Form1.cxmax;
-  Self.Fcymin:=Form1.cymin;
-  Self.Fcymax:=Form1.cymax;
-  Self.SaveZoom:=Form1.ASaveZoom;
-  if Form1.Saving then
-  begin
-   Self.Fixmax:=Form2.SaveImage.Width;
-   Self.Fiymax:=Form2.SaveImage.Height;
-  end
-  else
-  begin
-   Self.Fixmax:=Form1.ixmax;
-   Self.Fiymax:=Form1.iymax;
-  end;
-  Self.Pallette:=Form1.Pallette;
   Self.FreeOnTerminate:=true;
   Self.DoMandelBrot(Self.ThreadNumber);
   Self.Terminate;
@@ -337,14 +343,14 @@ begin
       //slicing will be done by X axis
       Self.ThreadNumber:=ParamThreadNumber;
       Self.myiymax:=Self.Fiymax;
-      Self.myixmin:=Self.Fixmax div CPU * Self.ThreadNumber;
-      Self.myixmax:=Self.Fixmax div CPU + Self.myixmin+Self.CPU;
+      Self.myixmin:=Self.Fixmax div Self.CPU * Self.ThreadNumber;
+      Self.myixmax:=Self.Fixmax div Self.CPU + Self.myixmin+Self.CPU;
       Self.MyImage:=TBitmap.Create;
       Self.MyImage.Width:=Self.myixmax-Self.myixmin;
       Self.MyImage.Height:=Self.myiymax;
       pixelwidth   := (Self.Fcxmax - Self.Fcxmin) / Self.Fixmax;
       pixelheight  := (Self.Fcymax - Self.Fcymin) / Self.Fiymax;
-      maxiteration:=StrToInt(Form1.Edit1.Text);
+      maxiteration:=Self.MaxIterations;
       for localiy := 1 to myiymax do
       begin
          //BitBtn2.Font.Color:=$FFFFFF div iymax - iy;
@@ -390,8 +396,19 @@ end;
 
 { TMyJuliaThread }
 
-constructor TMyJuliaThread.Create(CreateSuspended: boolean; ParamThreadNumber:integer);
+constructor TMyJuliaThread.Create(CreateSuspended: boolean; ParamThreadNumber:integer; JInitRecord:TJInitParam);
 begin
+     Self.CPU:=JInitRecord.CPU;
+     Self.SaveZoom:=JInitRecord.SaveZoom;
+     Self.jcx:=JInitRecord.jcx;
+     Self.jcy:=JInitRecord.jcy;
+     Self.zoom:=JInitRecord.zoom;
+     Self.MoveX:=JInitRecord.moveX;
+     Self.MoveY:=JInitRecord.moveY;
+     Self.jmaxiterations:=JInitRecord.jmaxiterations;
+     Self.Pallette:=JInitRecord.Pallette;
+     Self.Fixmax:=JInitRecord.Fixmax;
+     Self.Fiymax:=JInitRecord.Fiymax;
      Self.ThreadNumber:=ParamThreadNumber;
      Self.ForceTerminate:=false;
      inherited Create(CreateSuspended);
@@ -400,26 +417,6 @@ end;
 
 procedure TMyJuliaThread.Execute;
 begin
-  Self.CPU:=Form1.CPU;
-  Self.SaveZoom:=Form1.ASaveZoom;
-  if Form1.Saving then
-  begin
-   Self.Fixmax:=Form2.SaveImage.Width;
-   Self.Fiymax:=Form2.SaveImage.Height;
-  end
-  else
-  begin
-   Self.Fixmax:=Form1.ixmax;
-   Self.Fiymax:=Form1.iymax;
-  end;
-  Self.jcx:=Form1.jcx;
-  Self.jcy:=Form1.jcy;
-  Self.zoom:=Form1.zoom;
-  Self.SaveZoom:=Form1.ASaveZoom;
-  Self.MoveX:=Form1.moveX;
-  Self.MoveY:=Form1.moveY;
-  Self.jmaxiterations:=StrToInt(Form1.Edit1.Text);
-  Self.Pallette:=Form1.Pallette;
   Self.FreeOnTerminate:=true;
   Self.DoJulia(Self.ThreadNumber);
   Self.Terminate;
@@ -460,19 +457,19 @@ begin
 
   //computing the bitmap region each thread will handle
   //slicing will be done by X axis
-  Self.myiymax:=Self.fFiymax;
-  Self.myixmin:=Self.fFixmax div Self.fCPU * ParamThreadNumber;
-  Self.myixmax:=Self.fFixmax div Self.fCPU + Self.fmyixmin+Self.fCPU;
+  Self.myiymax:=Self.Fiymax;
+  Self.myixmin:=Self.Fixmax div Self.CPU * ParamThreadNumber;
+  Self.myixmax:=Self.Fixmax div Self.CPU + Self.myixmin+Self.CPU;
   Self.MyImage:=TBitmap.Create;
-  Self.MyImage.Width:=Self.fmyixmax-Self.fmyixmin;
-  Self.MyImage.Height:=Self.fmyiymax;
+  Self.MyImage.Width:=Self.myixmax-Self.myixmin;
+  Self.MyImage.Height:=Self.myiymax;
   //SetLength(Colors,jmaxiterations);
   // for i := 0 to Length(Colors) do
   //      Colors[i] := RGB((i shr 5) * 36, ((i shr 3) and 7) * 36, (i and 3) * 85);
    //Form1.UpdateInfo();
-   for x := Self.fmyixmin to Self.fmyixmax do
+   for x := Self.myixmin to Self.myixmax do
    begin
-     for y := 0 to Self.fmyiymax  do
+     for y := 0 to Self.myiymax  do
      begin
        // Check if the thread must forcibly terminate
        if Self.ForceTerminate then
@@ -481,20 +478,20 @@ begin
          Self.Terminate;
          Exit;
        end;
-       jzx := 2.0 * (x - Self.fFixmax / 2) / (0.5 * Self.fzoom * Self.fFixmax) + Self.fmoveX;
-       jzy := 2.0 * (y - Self.fFiymax / 2) / (0.5 * Self.fzoom * Self.fFiymax) + Self.fmoveY;
-       i := Self.fjmaxiterations;
+       jzx := 2.0 * (x - Self.Fixmax / 2) / (0.5 * Self.zoom * Self.Fixmax) + Self.moveX;
+       jzy := 2.0 * (y - Self.Fiymax / 2) / (0.5 * Self.zoom * Self.Fiymax) + Self.moveY;
+       i := Self.jmaxiterations;
        while (jzx * jzx + jzy * jzy < 4) and (i > 1) do
        begin
-         tmp := jzx * jzx - jzy * jzy + fjcx;
-         jzy := 2.0 * jzx * jzy + fjcy;
+         tmp := jzx * jzx - jzy * jzy + jcx;
+         jzy := 2.0 * jzx * jzy + jcy;
          jzx := tmp;
          i := i - 1;
        end;
        Self.ix:=x;
        Self.iy:=y;
        //MyImage.Canvas.Pixels[ix-myixmin,iy] := colors[i];
-       Self.MyImage.Canvas.Pixels[Self.ix-Self.myixmin,Self.iy]:=$FFFFFF div (Self.fjmaxiterations*Self.Pallette)*i;
+       Self.MyImage.Canvas.Pixels[Self.ix-Self.myixmin,Self.iy]:=$FFFFFF div (Self.jmaxiterations*Self.Pallette)*i;
      end;
      Self.Synchronize(@ShowStatusX);
    end;
@@ -1132,6 +1129,8 @@ end;
 procedure TForm1.BitBtn2Click(Sender: TObject);
 var
   i:integer;
+  MP:TMInitParam;
+  JP:TJInitParam;
 begin
   StartTime:=now;
   DisableAllControls;
@@ -1158,9 +1157,30 @@ begin
           Juliaprogress[i].Position:=0;
       end;
       TimerSet:=J;
+      //set initial parameters before creation and execution
+      JP.CPU:=Form1.CPU;
+      JP.SaveZoom:=Form1.ASaveZoom;
+      JP.jcx:=Form1.jcx;
+      JP.jcy:=Form1.jcy;
+      JP.zoom:=Form1.zoom;
+      JP.MoveX:=Form1.moveX;
+      JP.MoveY:=Form1.moveY;
+      JP.jmaxiterations:=StrToInt(Form1.Edit1.Text);
+      JP.Pallette:=Form1.Pallette;
+      if Form1.Saving then
+      begin
+       JP.Fixmax:=Form2.SaveImage.Width;
+       JP.Fiymax:=Form2.SaveImage.Height;
+      end
+      else
+      begin
+       JP.Fixmax:=Form1.ixmax;
+       JP.Fiymax:=Form1.iymax;
+      end;
+
       for i:=Low(JThreads) to High(JThreads)  do
       begin
-         JThreads[i]:=TMyJuliaThread.Create(False, i);
+         JThreads[i]:=TMyJuliaThread.Create(False, i, JP);
          JThreads[i].Start;
       end;
     end;
@@ -1175,9 +1195,28 @@ begin
           Mandelprogress[i].Position:=0;
       end;
       TimerSet:=M;
+      //set initial parameters before creation and execution
+      MP.CPU           := Form1.CPU;
+      MP.Fcxmax        := Form1.cxmax;
+      MP.Fcxmin        := Form1.cxmin;
+      MP.Fcymax        := Form1.cymax;
+      MP.Fcymin        := Form1.cymin;
+      MP.MaxIterations := StrToInt(Form1.Edit1.Text);
+      MP.SaveZoom      := Form1.ASaveZoom;
+      MP.Pallette      := Form1.Pallette;
+      if Form1.Saving then
+      begin
+       MP.Fixmax:=Form2.SaveImage.Width;
+       MP.Fiymax:=Form2.SaveImage.Height;
+      end
+      else
+      begin
+       MP.Fixmax:=Form1.ixmax;
+       MP.Fiymax:=Form1.iymax;
+      end;
       for i:=Low(MThreads) to High(MThreads)  do
       begin
-         MThreads[i]:=TMyMandelbrotThread.Create(False, i);
+         MThreads[i]:=TMyMandelbrotThread.Create(False, i, MP);
          MThreads[i].Start;
       end;
     end;
@@ -1185,10 +1224,7 @@ begin
 
 end;
 
-procedure TForm1.Action1Execute(Sender: TObject);
-begin
 
-end;
 
 procedure TForm1.BitBtn3Click(Sender: TObject);
 var
