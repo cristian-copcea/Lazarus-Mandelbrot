@@ -83,14 +83,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
-        <WindowIndex Value="1"/>
-        <TopLine Value="345"/>
-        <CursorPos X="2" Y="412"/>
+        <TopLine Value="19"/>
+        <CursorPos X="30" Y="19"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <IsVisibleTab Value="True"/>
-          <TopLine Value="1119"/>
-          <CursorPos X="16" Y="1168"/>
+          <WindowIndex Value="1"/>
+          <TopLine Value="345"/>
+          <CursorPos X="2" Y="412"/>
         </ExtraEditor1>
         <UsageCount Value="223"/>
         <Loaded Value="True"/>
@@ -104,7 +104,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit2"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="81" Y="18"/>
+        <CursorPos X="10" Y="18"/>
         <UsageCount Value="84"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -230,7 +230,7 @@
         <UsageCount Value="11"/>
       </Unit>
       <Unit>
-        <Filename Value="..\..\..\..\Cristian\AppData\Local\Temp\9957e4d1-ed40-4be0-9b10-4d6322629741_Example1.zip.741\HelloWorld.pas"/>
+        <Filename Value="D:\Cristian\AppData\Local\Temp\9957e4d1-ed40-4be0-9b10-4d6322629741_Example1.zip.741\HelloWorld.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos X="50" Y="33"/>
@@ -240,9 +240,6 @@
     <Debugger>
       <Backend Value="{2DEF1EA0-3C6F-4D8B-976C-3CA1417A66CF}"/>
     </Debugger>
-    <General>
-      <ActiveWindowIndexAtStart Value="1"/>
-    </General>
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="unit1.pas"/>
