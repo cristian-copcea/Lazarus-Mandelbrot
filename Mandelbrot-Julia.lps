@@ -83,14 +83,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="19"/>
-        <CursorPos X="30" Y="19"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="336"/>
+        <CursorPos X="2" Y="412"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <IsVisibleTab Value="True"/>
-          <WindowIndex Value="1"/>
-          <TopLine Value="345"/>
-          <CursorPos X="2" Y="412"/>
+          <TopLine Value="19"/>
+          <CursorPos X="30" Y="19"/>
         </ExtraEditor1>
         <UsageCount Value="223"/>
         <Loaded Value="True"/>
@@ -240,6 +240,9 @@
     <Debugger>
       <Backend Value="{2DEF1EA0-3C6F-4D8B-976C-3CA1417A66CF}"/>
     </Debugger>
+    <General>
+      <ActiveWindowIndexAtStart Value="1"/>
+    </General>
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="unit1.pas"/>

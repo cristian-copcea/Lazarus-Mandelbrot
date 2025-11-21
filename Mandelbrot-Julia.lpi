@@ -20,7 +20,7 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <BuildNr Value="1"/>
-      <StringTable CompanyName="Cristian Copcea" FileDescription="Mandelbrot and Julia sets generator" ProductVersion="1.0.0.1"/>
+      <StringTable Comments="Cristian Copcea" CompanyName="Cristian Copcea" FileDescription="Mandelbrot and Julia sets generator" LegalCopyright="Cristian Copcea" LegalTrademarks="Cristian Copcea" ProductVersion="1.0.0.1"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>
