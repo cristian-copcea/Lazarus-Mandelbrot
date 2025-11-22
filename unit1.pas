@@ -168,7 +168,6 @@ end;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
-    Label8: TLabel;
     Label9: TLabel;
     Panel1: TPanel;
     Panel10: TPanel;
