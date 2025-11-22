@@ -168,7 +168,6 @@ end;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
-    Label8: TLabel;
     Label9: TLabel;
     Panel1: TPanel;
     Panel10: TPanel;
@@ -606,8 +605,8 @@ begin
   begin
     Mandelprogress[i]:=TProgressBar.Create(nil);
     MandelProgress[i].Parent:=Form1.Panel5;
-    MandelProgress[i].Left:=Panel5.Width div CPU*i+5;
-    MandelProgress[i].Width:=Panel5.Width div CPU-1;
+    MandelProgress[i].Left:=(Panel5.Width-5) div CPU*i+5;
+    MandelProgress[i].Width:=(Panel5.Width-5) div CPU-1;
     MandelProgress[i].Height:=18;
     MandelProgress[i].Top:=ProgressBar2.Top-22;
     MandelProgress[i].Enabled:=True;
@@ -623,8 +622,8 @@ begin
   begin
     JuliaProgress[i]:=TProgressBar.Create(nil);
     JuliaProgress[i].Parent:=Form1.Panel7;
-    JuliaProgress[i].Left:=Panel7.Width div CPU*i+5;
-    JuliaProgress[i].Width:=Panel7.Width div CPU-1;
+    JuliaProgress[i].Left:=(Panel7.Width-5) div CPU*i+5;
+    JuliaProgress[i].Width:=(Panel7.Width-5) div CPU-1;
     JuliaProgress[i].Height:=18;
     JuliaProgress[i].Top:=ProgressBar1.Top-22;
     JuliaProgress[i].Enabled:=True;

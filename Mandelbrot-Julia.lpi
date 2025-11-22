@@ -9,7 +9,6 @@
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <XPManifest>
-        <DpiAware Value="True"/>
         <TextName Value="Cristian Copcea"/>
         <TextDesc Value="Mandelbrot and Julia sets generator"/>
       </XPManifest>
