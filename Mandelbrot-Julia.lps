@@ -72,6 +72,7 @@
       <Unit>
         <Filename Value="Mandelbrot-Julia.lpr"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <CursorPos Y="25"/>
         <UsageCount Value="223"/>
@@ -84,7 +85,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="649"/>
         <CursorPos X="56" Y="680"/>
         <ExtraEditorCount Value="1"/>
@@ -268,10 +268,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="unit1.pas"/>
-        <Caret Line="105" Column="77" TopLine="64"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
         <Caret Line="573" TopLine="560"/>
       </Position>
       <Position>
@@ -385,6 +381,10 @@
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="572" Column="27" TopLine="557"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="680" Column="56" TopLine="649"/>
       </Position>
     </JumpHistory>
     <RunParams>
