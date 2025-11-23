@@ -1,28 +1,27 @@
 object Form2: TForm2
-  Left = -448
-  Height = 621
-  Top = -1765
-  Width = 760
-  HorzScrollBar.Page = 760
-  VertScrollBar.Page = 521
+  Left = 0
+  Height = 497
+  Top = 32
+  Width = 608
+  HorzScrollBar.Page = 608
+  VertScrollBar.Page = 417
   AutoScroll = True
   Caption = 'Form2'
-  ClientHeight = 600
-  ClientWidth = 760
-  DesignTimePPI = 120
-  LCLVersion = '4.2.0.0'
+  ClientHeight = 497
+  ClientWidth = 608
+  LCLVersion = '4.4.0.0'
   OnCreate = FormCreate
   object SaveImage: TImage
     Left = 0
-    Height = 600
+    Height = 497
     Top = 0
-    Width = 800
+    Width = 640
     Align = alLeft
   end
   object button: TSpeedButton
-    Left = 612
+    Left = 490
     Height = 1
-    Top = 520
-    Width = 4
+    Top = 416
+    Width = 3
   end
 end

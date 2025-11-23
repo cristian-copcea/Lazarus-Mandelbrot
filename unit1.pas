@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Buttons,
-  StdCtrls, ComCtrls, LCLIntf, LCLType, ActnList, Menus, Math, Types, unit2 ;
+  StdCtrls, ComCtrls, LCLIntf, LCLType, ActnList, Menus, Math, Types, unit2, initc, ctypes ;
 
 type
 TMInitParam = record
@@ -271,7 +271,7 @@ var
   Form1: TForm1;
 
 implementation
-
+function sysconf(i:cint):clong; cdecl; external name 'sysconf' ;
 {$R *.lfm}
 
 { TMyMandelbrotThread }
@@ -295,10 +295,10 @@ end;
 
 procedure TMyMandelbrotThread.Execute;
 begin
-  Self.FreeOnTerminate:=true;
+  Self.FreeOnTerminate:=false;
   Self.DoMandelBrot(Self.ThreadNumber);
-  Self.Terminate;
-  Self.Free;
+  //Self.Terminate;
+  //Self.Free;
 end;
 procedure TMyMandelbrotThread.InitTerminate;
 begin
@@ -418,8 +418,8 @@ procedure TMyJuliaThread.Execute;
 begin
   Self.FreeOnTerminate:=true;
   Self.DoJulia(Self.ThreadNumber);
-  Self.Terminate;
-  Self.Free;
+  //Self.Terminate;
+  //Self.Free;
 end;
 procedure TMyJuliaThread.InitTerminate;
 begin
@@ -570,10 +570,10 @@ procedure TForm1.FormCreate(Sender: TObject);
 var
   i:integer;
 begin
-  if GetCPUCount() > 2 then
-     CPU:=GetCPUCount() -2
+  if sysconf(83) > 2 then
+     CPU:=sysconf(83) -2
   else
-     CPU:=GetCPUCount();
+     CPU:=sysconf(83);
   try
   if Paramcount<>0 then
   begin
