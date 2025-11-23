@@ -1,14 +1,13 @@
 object Form1: TForm1
-  Left = 629
+  Left = 294
   Height = 632
-  Top = -917
+  Top = 50
   Width = 1014
   ActiveControl = Edit1
   Caption = 'Fractals'
   ClientHeight = 632
   ClientWidth = 1014
   DefaultMonitor = dmMainForm
-  DesignTimePPI = 120
   Icon.Data = {
     3EC80000000001000100808000000100180028C8000016000000280000008000
     000000010000010018000000000000C000006400000064000000000000000000
@@ -1974,8 +1973,8 @@ object Form1: TForm1
         TabOrder = 1
         object RadioGroup2: TRadioGroup
           Left = 8
-          Height = 43
-          Top = 89
+          Height = 51
+          Top = 81
           Width = 192
           AutoFill = True
           Caption = 'Color Pallette'
@@ -1986,7 +1985,7 @@ object Form1: TForm1
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 18
+          ClientHeight = 26
           ClientWidth = 188
           ColumnLayout = clVerticalThenHorizontal
           Columns = 4
@@ -2087,7 +2086,7 @@ object Form1: TForm1
           OnChange = Edit1Change
         end
         object Label4: TLabel
-          Left = 200
+          Left = 208
           Height = 20
           Top = 80
           Width = 148

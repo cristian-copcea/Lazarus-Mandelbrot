@@ -297,8 +297,8 @@ procedure TMyMandelbrotThread.Execute;
 begin
   Self.FreeOnTerminate:=true;
   Self.DoMandelBrot(Self.ThreadNumber);
-  Self.Terminate;
-  Self.Free;
+  //Self.Terminate;
+  //Self.Free;
 end;
 procedure TMyMandelbrotThread.InitTerminate;
 begin
@@ -418,8 +418,8 @@ procedure TMyJuliaThread.Execute;
 begin
   Self.FreeOnTerminate:=true;
   Self.DoJulia(Self.ThreadNumber);
-  Self.Terminate;
-  Self.Free;
+  //Self.Terminate;
+  //Self.Free;
 end;
 procedure TMyJuliaThread.InitTerminate;
 begin
