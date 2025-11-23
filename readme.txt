@@ -123,4 +123,15 @@ Netflix is nice
 but I like more coding and optimizing code in the mean time.
 This is why I code instead. (not always though, I still need playtime)
 
+----------------------------------------
+What you will learn (included, but not limited to):
 
+- how to name your variables so you may get the gist of it instantly
+- how to perform an optimisation, even if for a particular case (the default Mandelbrot is optimized for symmetry on the X axis;
+- how to write threaded applications without errors
+- how to add Synchronization events for different tasks (I am using Synchronize to update progressBar positions and also to update chunks of the rendered image)
+- how to wite easily readeable/findable code
+- how to transform s**t into a whip and make it crack on Christmas (or Holy, doesn't matter)
+- how to declare variables you WILL use, not letting any garbage behind)
+- how to use booleans to decide fast what to do, with local/global range
+etc. You just need the will to see why each line of code sits where it sits.
