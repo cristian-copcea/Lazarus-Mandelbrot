@@ -674,8 +674,10 @@ begin
   Label17.Caption :='Resolution: '+IntToStr(ixmax)+' x '+IntToStr(iymax)+ ' pixels';
   Label33.Caption :='Zoom='+FloatToStrF(MZoom,ffnumber,2,2);
   //Julia
-  Label21.Caption :='cx='+FloatToStrF(jcx,ffnumber,2,22);
-  Label27.Caption :='cy='+FloatToStrF(jcy,ffnumber,2,22);
+  Label21.Caption :='cx='+FloatToStrF(jcx,ffnumber,2,6);
+  Label27.Caption :='cy='+FloatToStrF(jcy,ffnumber,2,6);
+  Label21.Hint    :='cx='+FloatToStrF(jcx,ffnumber,2,22);
+  Label27.Hint    :='cy='+FloatToStrF(jcy,ffnumber,2,22);
   Label29.Caption :='Top Left: ('+IntToStr(jx1)+', '+IntToStr(jy1)+')';
   Label30.Caption :='Current:  ('+IntToStr(jx2)+', '+IntToStr(jy2)+')';
   Label22.Caption :='Zoom='+FloatToStrF(Zoom,ffnumber,2,2);

@@ -72,8 +72,8 @@
       <Unit>
         <Filename Value="Mandelbrot-Julia.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="4"/>
-        <CursorPos X="19"/>
+        <EditorIndex Value="3"/>
+        <CursorPos Y="25"/>
         <UsageCount Value="223"/>
         <Loaded Value="True"/>
       </Unit>
@@ -84,8 +84,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <TopLine Value="557"/>
-        <CursorPos X="37" Y="561"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="649"/>
+        <CursorPos X="56" Y="680"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <IsVisibleTab Value="True"/>
@@ -104,9 +105,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit2"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="2"/>
         <CursorPos X="10" Y="18"/>
-        <UsageCount Value="85"/>
+        <UsageCount Value="87"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -239,7 +240,7 @@
       </Unit>
       <Unit>
         <Filename Value="..\..\..\..\usr\share\fpcsrc\rtl\unix\tthread.inc"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="1"/>
         <TopLine Value="110"/>
         <CursorPos Y="132"/>
         <UsageCount Value="11"/>
@@ -255,26 +256,16 @@
       <Unit>
         <Filename Value="..\..\..\..\usr\lib64\lazarus\components\lazutils\laztracer.pas"/>
         <UnitName Value="LazTracer"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="35"/>
-        <CursorPos Y="58"/>
-        <UsageCount Value="10"/>
-        <Loaded Value="True"/>
+        <CursorPos X="34" Y="47"/>
+        <UsageCount Value="11"/>
       </Unit>
     </Units>
     <Debugger>
       <Backend Value="{2DEF1EA0-3C6F-4D8B-976C-3CA1417A66CF}"/>
     </Debugger>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="494" Column="22" TopLine="463"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="409" TopLine="387"/>
-      </Position>
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="105" Column="77" TopLine="64"/>
@@ -387,6 +378,14 @@
         <Filename Value="unit1.pas"/>
         <Caret Line="561" Column="116" TopLine="557"/>
       </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="411" Column="2" TopLine="344"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="572" Column="27" TopLine="557"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -399,8 +398,8 @@
       </Modes>
     </RunParams>
     <HistoryLists>
-      <List Name="LaunchingApplication" Type="File" Count="2">
-        <Item2 Value="C:\Windows\system32\cmd.exe /C ${TargetCmdLine}"/>
+      <List Name="LaunchingApplication" Type="File" Count="1">
+        <Item1 Value="C:\Windows\system32\cmd.exe /C ${TargetCmdLine}"/>
       </List>
       <List Name="CommandLineParameters" Count="20">
         <Item1 Value="16 0"/>
@@ -424,7 +423,6 @@
         <Item19 Value="38 1"/>
         <Item20 Value="40 1"/>
       </List>
-      <List Name="WorkingDirectory" Type="File" Count="1"/>
     </HistoryLists>
   </ProjectSession>
   <Debugging>
