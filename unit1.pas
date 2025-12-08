@@ -428,7 +428,7 @@ end;
 procedure TMyJuliaThread.CopyImage;
 // this method is only called by Synchronize(@ShowStatus) and therefore
 // executed by the main thread
-// The main thread can access GUI elements, for example Form1.Caption.
+// The main thread can access GUI elements, i.e. Form1.whateverpropertyormethod.
 begin
   Form1.UpdateJuliaImage(MyImage, myixmin, myixmax, myiymax);
 end;
@@ -436,7 +436,7 @@ end;
 procedure TMyJuliaThread.ShowStatusX;
 // this method is only called by Synchronize(@ShowStatus) and therefore
 // executed by the main thread
-// The main thread can access GUI elements, for example Form1.Caption.
+// The main thread can access GUI elements, i.e. Form1.whateverpropertyormethod.
 var pos: int64;
 begin
   pos:=100*ix div myixmax;
