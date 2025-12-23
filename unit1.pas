@@ -910,6 +910,8 @@ begin
 
 end;
 
+
+
 procedure TForm1.Image2MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
@@ -1007,7 +1009,14 @@ begin
     begin   //switch back to Draw Mandelbrot
        RadioGroup1.ItemIndex:=0;
        //UpdateDefaultParameters;  only if we wish a full redraw of Mandelbrot when coming back from Julia
-       BitBtn2Click(Nil);
+       //BitBtn2Click(Nil);   actually if Mandelbrot is already drawn we could just flip the images :)
+       if JuliaSync then
+       begin
+         image2.Hide;
+         image1.Show;
+       end
+       else
+        BitBtn2Click(Nil);
     end;
    end;
   end;
