@@ -1615,7 +1615,7 @@ object Form1: TForm1
     C0FF
   }
   Position = poMainFormCenter
-  LCLVersion = '4.2.0.0'
+  LCLVersion = '4.4.0.0'
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   object Panel2: TPanel

@@ -326,7 +326,7 @@ procedure TMyMandelbrotThread.DoMandelBrot(ParamThreadNumber: integer);
 const
    escaperadius = 2;
 var
-   localix, localiy       : int64;
+   localix, localiy       : integer;
    cx, cy                 : extended;
    pixelwidth             : extended;
    pixelheight            : extended;
