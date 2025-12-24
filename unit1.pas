@@ -9,31 +9,32 @@ uses
   StdCtrls, ComCtrls, LCLIntf, LCLType, ActnList, Menus, Math, Types, unit2 ;
 
 type
+  //composite data used to initialize Mandelbrot threads
 TMInitParam = record
-    CPU:           integer  ;
-    Fcxmin:        extended ;
+    CPU:           integer  ;    //thread number. Tied to CPU cores but can be overridden by running parameter
+    Fcxmin:        extended ;    //c values to plot
     Fcxmax:        extended ;
     Fcymin:        extended ;
     Fcymax:        extended ;
-    Fixmax:        int64    ;
-    Fiymax:        int64    ;
-    SaveZoom:      integer  ;
-    Pallette:      integer  ;
-    MaxIterations: integer  ;
+    Fixmax:        int64    ;    //pixels to plot on X axis
+    Fiymax:        int64    ;    //pixels to plot on Y axis
+    SaveZoom:      integer  ;    //the zoom used if saving a image
+    Pallette:      integer  ;    //color palette. not used yet
+    MaxIterations: integer  ;    //Max Iterations for divergence
 end;
 
 TJInitParam = record
-    CPU:               integer;
-    SaveZoom:          integer;
-    Fixmax:            int64;
-    Fiymax:            int64;
-    jcx:               extended;
+    CPU:               integer;  //thread number. Tied to CPU cores but can be overridden by running parameter
+    SaveZoom:          integer;  //the zoom used if saving a image
+    Fixmax:            int64;    //pixels to plot on X axis
+    Fiymax:            int64;    //pixels to plot on Y axis
+    jcx:               extended; //c value to plot for. Can be synced to Mandelbrot set
     jcy:               extended;
-    zoom:              extended;
-    MoveX:             extended;
+    zoom:              extended; //computed zoom to display a detail
+    MoveX:             extended; //computed DX and DY to display a detail
     MoveY:             extended;
-    jmaxiterations:    integer;
-    Pallette:          integer;
+    jmaxiterations:    integer;  //Max Iterations for divergence
+    Pallette:          integer;  //color palette. not used yet
 end;
 
 
@@ -42,6 +43,7 @@ end;
 
   TMyMandelbrotThread = class(TThread)
       {custom procedures}
+    //main procedure to render an image slice
     procedure DoMandelBrot(ParamThreadNumber: integer);
 
   private
@@ -51,8 +53,8 @@ end;
     MyImage: TBitmap;
     fMInitParam: TMInitParam;
     fForceTerminate: boolean;
-    procedure CopyImage;
-    procedure ShowStatusY;
+    procedure CopyImage;    // procedure that copies the rendered image slice
+    procedure ShowStatusY;  // procedure that returns the work status
 
   protected
     procedure Execute; override;
@@ -85,6 +87,7 @@ end;
 
   TMyJuliaThread = class(TThread)
       {custom procedures}
+    //main procedure to render an image slice
     procedure DoJulia(ParamThreadNumber: integer);
 
   private
@@ -203,7 +206,6 @@ end;
     procedure Image1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure Image1Resize(Sender: TObject);
-    procedure Image1SizeConstraintsChange(Sender: TObject);
 
     procedure Image2MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -223,45 +225,51 @@ end;
 
 
   private
-  CPU: integer;
-  MouseDownFromMandelbrot, MandelbrotDrawed: boolean;
-  ThreadLock: TCriticalSection;
-  Saving: boolean;
-  ASaveZoom:integer;
-  ThreadsDone:boolean;
-  //Mandelbrot
-  x1,x2,y1,y2:integer;
-  cxmin, cxmax, cymin, cymax : extended;
-  acxmin: extended;
+  CPU: integer; //number of CPUs in the system. Used to compute the threads number
+  //The following variable needs a special comment:
+  //right clicking the mouse on Mandelbrot image triggers a Mouse up event on Julia image
+  //because the code switches to that image.
+  //Setting the above when clicking informs the system that the mouse was clicked on Mandelbrot image.
+  MouseDownFromMandelbrot: boolean;
+  MandelbrotDrawed: boolean;    //Mandelbrot was rendered prior to render Julia
+  ThreadLock: TCriticalSection; //section used to avoid copying simultaneously image slices in the big M/J image
+  Saving: boolean;              //the software is saving an image
+  ASaveZoom:integer;            //zoom used for the saved image
+  ThreadsDone:boolean;          //all threads terminated their job
+  TimerSet: (J,M);              //needed to properly write the time elapsed for M or J
+
+  //Mandelbrot specific variables
+  x1,x2,y1,y2:integer;                       //viewport coordinates
+  cxmin, cxmax, cymin, cymax : extended;     //c range to plot
+  acxmin: extended;                          //c range to inform about
   acxmax: extended;
   acymin: extended;
   acymax: extended;
-  cxminabs, cxmaxabs, cyminabs, cymaxabs : extended;
-  ixmax, iymax: int64;
-  MandelProgress: array of TProgressbar;
-  MThreads : array of TMyMandelbrotThread;
-  Mzoom: extended;
-  StartTime, StopTime: TDateTime;
-  TimerSet: (J,M);
-  //Julia
-  zoom, moveX, moveY: extended;
-  jcx, jcy: extended;
+  cxminabs, cxmaxabs, cyminabs, cymaxabs : extended; //absolute c coordinates
+  ixmax, iymax: int64;                               //max viewport coordinates
+  MandelProgress: array of TProgressbar;             //Mandelbrot render progress
+  MThreads : array of TMyMandelbrotThread;           //threads used to render Mandelbrot
+  Mzoom: extended;                                   //Mandelbrot image zoom
+  StartTime, StopTime: TDateTime;                    //time elapsed on rendering
+
+  //Julia                                            //zoom and displacement for Julia detail
+  zoom, moveX, moveY: extended;                      //c for which Julia is rendered
+  jcx, jcy: extended;                                //Julia viewport coordinates
   jx1, jx2, jy1, jy2:integer;
-  JuliaProgress: array of TProgressbar;
-  JuliaSync: boolean;
-  JThreads : array of TMyJuliaThread;
-  //var
-  re_left, im_top: extended;
+  JuliaProgress: array of TProgressbar;              //Julia render progress
+  JuliaSync: boolean;                                //Julia set is synced with Mandelbrot
+  JThreads : array of TMyJuliaThread;                //threads used to render Julia
+  re_left, im_top: extended;                         //temp values used to compute viewport coordinates
   re_right, im_bottom: extended;
   zoom_x, zoom_y: extended;
-  Pallette: integer;
+  Pallette: integer;                                 //not used yet
   procedure UpdateInfo();
   procedure UpdateInfoNonCommitted(acx1,acx2,acy1,acy2:extended);
   procedure UpdateDefaultParameters();
   procedure UpdateMandelbrotImage(ABitmap:TBitmap; Amyixmin, Amyixmax, Amyiymax: integer);
   procedure UpdateJuliaImage(ABitmap:TBitmap; Amyixmin, Amyixmax, Amyiymax: integer);
-  procedure DisableAllControls;
-  procedure EnableAllControls;
+  procedure DisableAllControls;                      //disable controls while rendering/saving
+  procedure EnableAllControls;                       //enable controls after rendering/saving
 
   public
 
@@ -302,11 +310,19 @@ begin
 end;
 procedure TMyMandelbrotThread.InitTerminate;
 begin
+  //when the main form is closed before
+  //the threads terminated their work,
+  //each thread is informed that it
+  //should terminate. The main working
+  //thread is verifying this value on
+  //each loop and it exits the loop if the value is true.
   Self.ForceTerminate:=true;
 end;
 
 procedure TMyMandelbrotThread.CopyImage;
 // this method is only called by Synchronize(@ShowStatus)
+// and therefore it is executed by the main thread
+// The main thread can access GUI elements.
 begin
   Form1.UpdateMandelbrotImage(MyImage, myixmin, myixmax, myiymax);
 end;
@@ -314,7 +330,7 @@ end;
 procedure TMyMandelbrotThread.ShowStatusY;
 // this method is only called by Synchronize(@ShowStatus) and therefore
 // executed by the main thread
-// The main thread can access GUI elements, for example Form1.Caption.
+// The main thread can access GUI elements.
 var pos: int64;
 begin
   pos:=100*iy div Self.myiymax;
@@ -358,7 +374,7 @@ begin
          if abs(cy) < pixelheight / 2 then cy := 0.0;
          for localix := Self.myixmin to Self.myixmax do
          begin
-            //check if one must terminate early
+            //check if the thread must terminate forcibly
             if Self.ForceTerminate then
             begin
               MyImage.Destroy;
@@ -418,8 +434,6 @@ procedure TMyJuliaThread.Execute;
 begin
   Self.FreeOnTerminate:=true;
   Self.DoJulia(Self.ThreadNumber);
-  //Self.Terminate;
-  //Self.Free;
 end;
 procedure TMyJuliaThread.InitTerminate;
 begin
@@ -501,6 +515,8 @@ end;
 { TForm1 }
 procedure TForm1.UpdateMandelbrotImage(ABitmap:TBitmap; Amyixmin, Amyixmax, Amyiymax: integer);
 begin
+  //a critical section is needed to avoid multiple
+  //threads updating their rendered image slice at the same time
   InitializeCriticalSection(ThreadLock);
   try
         if not saving then
@@ -525,6 +541,8 @@ end;
 
 procedure TForm1.UpdateJuliaImage(ABitmap:TBitmap; Amyixmin, Amyixmax, Amyiymax: integer);
 begin
+  //a critical section is needed to avoid multiple
+  //threads updating their rendered image slice at the same time
   InitializeCriticalSection(ThreadLock);
   try
         if not saving then
@@ -585,22 +603,24 @@ begin
 
   end;
   Caption := 'Fractals on '+IntToStr(CPU)+' threads';
-  SetLength(MandelProgress,CPU);
-  ProgressBar2.Max:=CPU;
-  SetLength(JuliaProgress,CPU);
-  ProgressBar1.Max:=CPU;
+  //set number or threads
   SetLength(MThreads,CPU);
   SetLength(JThreads,CPU);
+  //arrange images a little bit
   Image2.Picture.Bitmap.PixelFormat:=pf24bit;
   Image1.Picture.Bitmap.PixelFormat:=pf24bit;
   Image2.Align:=alClient;
   Image1.Align:=alClient;
-  //SaveImage:=TImage.Create(nil);
-  //SaveImage.Visible:=false;
+
   ASaveZoom:=StrToInt(Label32.Caption);
   ThreadsDone:=True;
   Image2.Hide;
   JuliaSync:=False;
+  //compute number of progressbars for threads and display them on the form
+  SetLength(MandelProgress,CPU);
+  ProgressBar2.Max:=CPU;
+  SetLength(JuliaProgress,CPU);
+  ProgressBar1.Max:=CPU;
   for i:=0 to CPU-1 do
   begin
     Mandelprogress[i]:=TProgressBar.Create(nil);
@@ -723,19 +743,6 @@ begin
   Label11.Hint :='cx2='+FloatToStrF(acx2,ffnumber,2,22);
   Label10.Hint :='cy1='+FloatToStrF(acy1,ffnumber,2,22);
   Label12.Hint :='cy2='+FloatToStrF(acy2,ffnumber,2,22);
-
-  //if JuliaSync then
-  //begin
-  //  Label28.Caption:='Drawing Corresponding Julia Set With:';
-  //  RadioGroup1.Items[1]:='Corresponding Julia Set';
-  //  Panel8.Font.Color:=clRed;
-  //end
-  //else
-  //begin
-  //  Label28.Caption:='Drawing Default Julia Set With:';
-  //  RadioGroup1.Items[1]:='Default Julia Set';
-  //  Panel8.Font.Color:=clGreen;
-  //end;
 end;
 procedure TForm1.UpdateDefaultParameters();
 begin
@@ -757,8 +764,6 @@ begin
     cymaxabs :=  2.01;
     MZoom:=1;
 end;
-
-
 
 
 procedure TForm1.Image1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -904,12 +909,6 @@ begin
   Image1.Picture.Bitmap.SetSize(ixmax, iymax);
 
 end;
-
-procedure TForm1.Image1SizeConstraintsChange(Sender: TObject);
-begin
-
-end;
-
 
 
 procedure TForm1.Image2MouseDown(Sender: TObject; Button: TMouseButton;
@@ -1411,9 +1410,6 @@ begin
      //Tell the form it may close now
      CanClose:=true;
  end;
-
-
-
 
 
 end.
