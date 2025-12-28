@@ -1,13 +1,14 @@
 object Form1: TForm1
-  Left = 468
-  Height = 632
-  Top = 361
-  Width = 1014
+  Left = 171
+  Height = 790
+  Top = 136
+  Width = 1268
   ActiveControl = Edit1
   Caption = 'Fractals'
-  ClientHeight = 632
-  ClientWidth = 1014
+  ClientHeight = 790
+  ClientWidth = 1268
   DefaultMonitor = dmMainForm
+  DesignTimePPI = 120
   Icon.Data = {
     3EC80000000001000100808000000100180028C8000016000000280000008000
     000000010000010018000000000000C000006400000064000000000000000000
@@ -1619,35 +1620,35 @@ object Form1: TForm1
   OnCreate = FormCreate
   object Panel2: TPanel
     Left = 0
-    Height = 632
+    Height = 790
     Top = 0
-    Width = 632
+    Width = 790
     Align = alClient
     AutoSize = True
     BevelInner = bvLowered
     BorderStyle = bsSingle
-    ClientHeight = 630
-    ClientWidth = 630
+    ClientHeight = 786
+    ClientWidth = 786
     TabOrder = 0
     object ScrollBox1: TScrollBox
       Left = 2
-      Height = 626
+      Height = 782
       Top = 2
-      Width = 626
+      Width = 782
       HorzScrollBar.Increment = 23
-      HorzScrollBar.Page = 416
+      HorzScrollBar.Page = 520
       VertScrollBar.Increment = 22
-      VertScrollBar.Page = 290
+      VertScrollBar.Page = 363
       Align = alClient
-      ClientHeight = 624
-      ClientWidth = 624
+      ClientHeight = 778
+      ClientWidth = 778
       TabOrder = 0
       object MandelbrotImage: TImage
         Left = 0
-        Height = 223
+        Height = 279
         Hint = 'Mandelbrot image:'#13#10'- Shift, Click and drag to zoom. '#13#10'- Shift + Right Click to generate '#13#10'    corresponding Julia set.'
         Top = 0
-        Width = 238
+        Width = 298
         Center = True
         ParentShowHint = False
         ShowHint = True
@@ -1658,11 +1659,11 @@ object Form1: TForm1
         OnResize = MandelbrotImageResize
       end
       object JuliaImage: TImage
-        Left = 143
-        Height = 227
+        Left = 179
+        Height = 284
         Hint = 'Julia image:'#13#10'- Shift, Click and drag to zoom. '
-        Top = 63
-        Width = 273
+        Top = 79
+        Width = 341
         ParentShowHint = False
         ShowHint = True
         OnMouseDown = JuliaImageMouseDown
@@ -1671,10 +1672,10 @@ object Form1: TForm1
         OnResize = JuliaImageResize
       end
       object Shape1: TShape
-        Left = 138
-        Height = 128
-        Top = 246
-        Width = 150
+        Left = 196
+        Height = 160
+        Top = 327
+        Width = 188
         Anchors = []
         Brush.Color = clNone
         Brush.Style = bsPattern
@@ -1685,59 +1686,59 @@ object Form1: TForm1
         Visible = False
       end
       object Label31: TLabel
-        Left = 8
-        Height = 19
-        Top = 8
-        Width = 81
+        Left = 10
+        Height = 20
+        Top = 10
+        Width = 75
         Caption = 'Rendering: '
         ParentColor = False
       end
     end
   end
   object Panel3: TPanel
-    Left = 632
-    Height = 632
+    Left = 790
+    Height = 790
     Top = 0
-    Width = 382
+    Width = 478
     Align = alRight
     BevelInner = bvLowered
     BorderStyle = bsSingle
-    ClientHeight = 630
-    ClientWidth = 380
+    ClientHeight = 786
+    ClientWidth = 474
     TabOrder = 1
     object Panel4: TPanel
       Left = 2
-      Height = 626
+      Height = 782
       Top = 2
-      Width = 376
+      Width = 470
       Align = alClient
       BevelInner = bvRaised
-      ClientHeight = 626
-      ClientWidth = 376
+      ClientHeight = 782
+      ClientWidth = 470
       TabOrder = 0
       object Panel5: TPanel
         Left = 2
-        Height = 268
-        Top = 143
-        Width = 368
+        Height = 335
+        Top = 179
+        Width = 460
         BevelColor = clBlue
         BevelInner = bvRaised
-        ClientHeight = 268
-        ClientWidth = 368
+        ClientHeight = 335
+        ClientWidth = 460
         TabOrder = 0
         object Label25: TLabel
-          Left = 210
+          Left = 262
           Height = 1
-          Top = 52
+          Top = 65
           Width = 1
           ParentColor = False
         end
         object ProgressBar2: TProgressBar
           Left = 2
-          Height = 10
+          Height = 12
           Hint = 'Total render progress'
-          Top = 256
-          Width = 364
+          Top = 321
+          Width = 456
           Align = alBottom
           Max = 10
           ParentShowHint = False
@@ -1747,9 +1748,9 @@ object Form1: TForm1
         end
         object Panel1: TPanel
           Left = 2
-          Height = 23
+          Height = 29
           Top = 4
-          Width = 364
+          Width = 456
           Align = alTop
           BorderSpacing.Top = 2
           BevelColor = clBlue
@@ -1761,36 +1762,36 @@ object Form1: TForm1
         end
         object Panel10: TPanel
           Left = 2
-          Height = 58
-          Top = 94
-          Width = 364
+          Height = 72
+          Top = 116
+          Width = 456
           Align = alTop
           BorderSpacing.Top = 2
           BevelColor = clBlue
-          ClientHeight = 58
-          ClientWidth = 364
+          ClientHeight = 72
+          ClientWidth = 456
           TabOrder = 2
           object MResolutionLabel: TLabel
-            Left = 12
-            Height = 19
-            Top = 17
-            Width = 79
+            Left = 15
+            Height = 20
+            Top = 21
+            Width = 73
             Caption = 'Resolution:'
             ParentColor = False
           end
           object MZoomLabel: TLabel
-            Left = 12
-            Height = 19
-            Top = 37
-            Width = 44
+            Left = 15
+            Height = 20
+            Top = 46
+            Width = 43
             Caption = 'Zoom:'
             ParentColor = False
           end
           object Label1: TLabel
-            Left = 112
-            Height = 19
+            Left = 140
+            Height = 20
             Top = 0
-            Width = 96
+            Width = 92
             Caption = 'Image Details'
             Font.Color = clBlue
             ParentColor = False
@@ -1799,46 +1800,46 @@ object Form1: TForm1
         end
         object Panel11: TPanel
           Left = 2
-          Height = 63
-          Top = 29
-          Width = 364
+          Height = 79
+          Top = 35
+          Width = 456
           Align = alTop
           BorderSpacing.Top = 2
           BevelColor = clBlue
-          ClientHeight = 63
-          ClientWidth = 364
+          ClientHeight = 79
+          ClientWidth = 456
           TabOrder = 3
           object Label2: TLabel
-            Left = 88
-            Height = 19
+            Left = 110
+            Height = 20
             Top = 0
-            Width = 214
+            Width = 202
             Caption = 'Mandelbrot Set Display Values'
             Font.Color = clBlue
             ParentColor = False
             ParentFont = False
           end
           object Label18: TLabel
-            Left = 12
-            Height = 19
-            Top = 20
-            Width = 61
+            Left = 15
+            Height = 20
+            Top = 25
+            Width = 57
             Caption = 'Top Left:'
             ParentColor = False
           end
           object Label19: TLabel
-            Left = 12
-            Height = 19
-            Top = 40
-            Width = 68
+            Left = 15
+            Height = 20
+            Top = 50
+            Width = 65
             Caption = 'Bot Right:'
             ParentColor = False
           end
           object Mcx1minLabel: TLabel
-            Left = 88
-            Height = 19
-            Top = 20
-            Width = 48
+            Left = 110
+            Height = 20
+            Top = 25
+            Width = 47
             Caption = 'cx1min'
             ParentColor = False
             ParentFont = False
@@ -1846,30 +1847,30 @@ object Form1: TForm1
             ShowHint = True
           end
           object Mcx2minLabel: TLabel
-            Left = 88
-            Height = 19
-            Top = 40
-            Width = 51
+            Left = 110
+            Height = 20
+            Top = 50
+            Width = 47
             Caption = 'cx2min'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
           end
           object Mcy1minLabel: TLabel
-            Left = 217
-            Height = 19
-            Top = 20
-            Width = 48
+            Left = 271
+            Height = 20
+            Top = 25
+            Width = 47
             Caption = 'cy1min'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
           end
           object Mcy2minLabel: TLabel
-            Left = 217
-            Height = 19
-            Top = 40
-            Width = 51
+            Left = 271
+            Height = 20
+            Top = 50
+            Width = 47
             Caption = 'cy2min'
             ParentColor = False
             ParentShowHint = False
@@ -1878,85 +1879,85 @@ object Form1: TForm1
         end
         object Panel12: TPanel
           Left = 2
-          Height = 78
-          Top = 154
-          Width = 364
+          Height = 98
+          Top = 190
+          Width = 456
           Align = alTop
           BorderSpacing.Top = 2
           BevelColor = clBlue
-          ClientHeight = 78
-          ClientWidth = 364
+          ClientHeight = 98
+          ClientWidth = 456
           TabOrder = 4
           object MTopLeftCoordinatesLabel: TLabel
-            Left = 7
-            Height = 19
-            Top = 17
-            Width = 61
+            Left = 9
+            Height = 20
+            Top = 21
+            Width = 57
             Caption = 'Top Left:'
             ParentColor = False
           end
           object MCurrentCoordinatesLabel: TLabel
-            Left = 7
-            Height = 19
-            Top = 37
-            Width = 58
+            Left = 9
+            Height = 20
+            Top = 46
+            Width = 51
             Caption = 'Current:'
             ParentColor = False
           end
           object Mcx1curLabel: TLabel
-            Left = 152
-            Height = 19
-            Top = 17
-            Width = 45
+            Left = 190
+            Height = 20
+            Top = 21
+            Width = 42
             Caption = 'cx1cur'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
           end
           object Mcy1curLabel: TLabel
-            Left = 248
-            Height = 19
-            Top = 17
-            Width = 45
+            Left = 310
+            Height = 20
+            Top = 21
+            Width = 42
             Caption = 'cy1cur'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
           end
           object Mcy2curLabel: TLabel
-            Left = 248
-            Height = 19
-            Top = 37
-            Width = 48
+            Left = 310
+            Height = 20
+            Top = 46
+            Width = 42
             Caption = 'cy2cur'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
           end
           object Mcx2curLabel: TLabel
-            Left = 152
-            Height = 19
-            Top = 37
-            Width = 48
+            Left = 190
+            Height = 20
+            Top = 46
+            Width = 42
             Caption = 'cx2cur'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
           end
           object MDivergenceLabel: TLabel
-            Left = 8
-            Height = 19
-            Top = 57
-            Width = 81
+            Left = 10
+            Height = 20
+            Top = 71
+            Width = 75
             Caption = 'Divergence'
             ParentColor = False
             ParentFont = False
           end
           object Label3: TLabel
-            Left = 88
-            Height = 19
+            Left = 110
+            Height = 20
             Top = 0
-            Width = 158
+            Width = 148
             Caption = 'Pixel/Selection Details'
             Font.Color = clBlue
             ParentColor = False
@@ -1966,19 +1967,19 @@ object Form1: TForm1
       end
       object Panel6: TPanel
         Left = 2
-        Height = 142
+        Height = 178
         Top = 2
-        Width = 372
+        Width = 466
         Align = alTop
         BevelColor = clBlack
-        ClientHeight = 142
-        ClientWidth = 372
+        ClientHeight = 178
+        ClientWidth = 466
         TabOrder = 1
         object RadioGroup2: TRadioGroup
-          Left = 8
-          Height = 51
-          Top = 81
-          Width = 192
+          Left = 10
+          Height = 64
+          Top = 101
+          Width = 240
           AutoFill = True
           Caption = 'Color Pallette'
           ChildSizing.LeftRightSpacing = 6
@@ -1988,8 +1989,8 @@ object Form1: TForm1
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 31
-          ClientWidth = 190
+          ClientHeight = 39
+          ClientWidth = 236
           ColumnLayout = clVerticalThenHorizontal
           Columns = 4
           ItemIndex = 0
@@ -2003,20 +2004,20 @@ object Form1: TForm1
           OnSelectionChanged = RadioGroup2SelectionChanged
         end
         object BitBtn2: TBitBtn
-          Left = 208
-          Height = 48
-          Top = 18
-          Width = 48
+          Left = 260
+          Height = 60
+          Top = 22
+          Width = 60
           Caption = 'Plot!'
           TabOrder = 0
           OnClick = BitBtn2Click
         end
         object RadioGroup1: TRadioGroup
-          Left = -11
-          Height = 70
+          Left = 17
+          Height = 88
           Hint = 'Mandelbrot/Julia sets selection'
-          Top = -1
-          Width = 192
+          Top = 10
+          Width = 240
           Anchors = []
           AutoFill = False
           BorderSpacing.CellAlignHorizontal = ccaCenter
@@ -2027,8 +2028,8 @@ object Form1: TForm1
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 50
-          ClientWidth = 190
+          ClientHeight = 63
+          ClientWidth = 236
           ItemIndex = 0
           Items.Strings = (
             'Mandelbrot set'
@@ -2040,11 +2041,11 @@ object Form1: TForm1
           OnSelectionChanged = RadioGroup1SelectionChanged
         end
         object BitBtn3: TBitBtn
-          Left = 256
-          Height = 48
+          Left = 320
+          Height = 60
           Hint = 'Save original or resolution multiplied image'
-          Top = 18
-          Width = 48
+          Top = 22
+          Width = 60
           Caption = 'Save'
           ParentShowHint = False
           ShowHint = True
@@ -2052,11 +2053,11 @@ object Form1: TForm1
           OnClick = BitBtn3Click
         end
         object UpDown1: TUpDown
-          Left = 304
-          Height = 28
+          Left = 380
+          Height = 35
           Hint = 'Resolution Multiplier Change'
-          Top = 38
-          Width = 27
+          Top = 48
+          Width = 34
           Min = 0
           ParentShowHint = False
           Position = 0
@@ -2065,10 +2066,10 @@ object Form1: TForm1
           OnChangingEx = UpDown1ChangingEx
         end
         object Label35: TLabel
-          Left = 335
-          Height = 19
-          Top = 46
-          Width = 9
+          Left = 419
+          Height = 20
+          Top = 58
+          Width = 8
           Caption = 'x'
           Font.Color = clGreen
           Font.Style = [fsBold]
@@ -2076,11 +2077,11 @@ object Form1: TForm1
           ParentFont = False
         end
         object Edit1: TEdit
-          Left = 240
-          Height = 36
+          Left = 300
+          Height = 28
           Hint = 'Input divergence iterations'
-          Top = 104
-          Width = 103
+          Top = 130
+          Width = 129
           NumbersOnly = True
           ParentShowHint = False
           ShowHint = True
@@ -2089,19 +2090,19 @@ object Form1: TForm1
           OnChange = Edit1Change
         end
         object Label4: TLabel
-          Left = 208
-          Height = 19
-          Top = 80
-          Width = 160
+          Left = 260
+          Height = 20
+          Top = 100
+          Width = 148
           Caption = 'Divergence Iterations :'
           ParentColor = False
         end
         object Label32: TLabel
-          Left = 344
-          Height = 19
+          Left = 430
+          Height = 20
           Hint = 'Resolution multiplier'
-          Top = 46
-          Width = 6
+          Top = 58
+          Width = 9
           Caption = '1'
           Font.Color = clGreen
           Font.Style = [fsBold]
@@ -2114,18 +2115,18 @@ object Form1: TForm1
       end
       object Panel7: TPanel
         Left = 2
-        Height = 187
-        Top = 417
-        Width = 368
+        Height = 234
+        Top = 521
+        Width = 460
         BevelColor = clRed
-        ClientHeight = 187
-        ClientWidth = 368
+        ClientHeight = 234
+        ClientWidth = 460
         TabOrder = 2
         object ProgressBar1: TProgressBar
           Left = 1
-          Height = 10
-          Top = 176
-          Width = 366
+          Height = 12
+          Top = 221
+          Width = 458
           Align = alBottom
           ParentShowHint = False
           ShowHint = True
@@ -2134,9 +2135,9 @@ object Form1: TForm1
         end
         object Panel8: TPanel
           Left = 1
-          Height = 23
+          Height = 29
           Top = 1
-          Width = 366
+          Width = 458
           Align = alTop
           BevelColor = clRed
           Caption = 'Julia set'
@@ -2147,120 +2148,120 @@ object Form1: TForm1
         end
         object Panel13: TPanel
           Left = 1
-          Height = 38
-          Top = 26
-          Width = 366
+          Height = 48
+          Top = 32
+          Width = 458
           Align = alTop
           BorderSpacing.Top = 2
           BevelColor = clRed
-          ClientHeight = 38
-          ClientWidth = 366
+          ClientHeight = 48
+          ClientWidth = 458
           TabOrder = 2
           object JDrawingLabel: TLabel
-            Left = 72
-            Height = 19
+            Left = 90
+            Height = 20
             Top = 0
-            Width = 254
+            Width = 236
             Caption = 'Drawing Corresponding Julia Set at:'
             Font.Color = clRed
             ParentColor = False
             ParentFont = False
           end
           object JcxLabel: TLabel
-            Left = 8
-            Height = 19
-            Top = 17
-            Width = 16
+            Left = 10
+            Height = 20
+            Top = 21
+            Width = 14
             Caption = 'cx'
             ParentColor = False
           end
           object JcyLabel: TLabel
-            Left = 192
-            Height = 19
-            Top = 17
-            Width = 16
+            Left = 240
+            Height = 20
+            Top = 21
+            Width = 14
             Caption = 'cy'
             ParentColor = False
           end
         end
         object Panel14: TPanel
           Left = 1
-          Height = 83
-          Top = 66
-          Width = 366
+          Height = 104
+          Top = 82
+          Width = 458
           Align = alTop
           BorderSpacing.Top = 2
           BevelColor = clRed
-          ClientHeight = 83
-          ClientWidth = 366
+          ClientHeight = 104
+          ClientWidth = 458
           TabOrder = 3
           object JX1Label: TLabel
-            Left = 8
-            Height = 19
-            Top = 17
-            Width = 16
+            Left = 10
+            Height = 20
+            Top = 21
+            Width = 17
             Caption = 'X1'
             ParentColor = False
           end
           object JX2Label: TLabel
-            Left = 8
-            Height = 19
-            Top = 38
-            Width = 19
+            Left = 10
+            Height = 20
+            Top = 48
+            Width = 17
             Caption = 'X2'
             ParentColor = False
           end
           object JDivergenceLabel: TLabel
-            Left = 8
-            Height = 19
-            Top = 60
-            Width = 85
+            Left = 10
+            Height = 20
+            Top = 75
+            Width = 78
             Caption = 'Divergence:'
             ParentColor = False
           end
           object JZoomLabel: TLabel
-            Left = 177
-            Height = 19
-            Top = 60
-            Width = 44
+            Left = 221
+            Height = 20
+            Top = 75
+            Width = 43
             Caption = 'Zoom:'
             ParentColor = False
           end
           object JPanXLabel: TLabel
-            Left = 177
-            Height = 19
-            Top = 17
-            Width = 44
+            Left = 221
+            Height = 20
+            Top = 21
+            Width = 39
             Caption = 'Pan X:'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
           end
           object JPanYLabel: TLabel
-            Left = 178
-            Height = 19
-            Top = 38
-            Width = 43
+            Left = 222
+            Height = 20
+            Top = 48
+            Width = 38
             Caption = 'Pan Y:'
             ParentColor = False
             ParentShowHint = False
             ShowHint = True
           end
           object Label7: TLabel
-            Left = 8
-            Height = 19
+            Left = 10
+            Height = 20
             Top = 0
-            Width = 158
+            Width = 148
             Caption = 'Pixel/Selection Details'
             Font.Color = clRed
             ParentColor = False
             ParentFont = False
           end
           object Label20: TLabel
-            Left = 183
-            Height = 19
+            Left = 229
+            Height = 20
             Top = 0
-            Width = 174
+            Width = 163
             Caption = 'Overall Image Transform'
             Font.Color = clRed
             ParentColor = False
@@ -2294,8 +2295,8 @@ object Form1: TForm1
       'ColorS=F0FBFF'
       'ColorT=A4A0A0'
     )
-    Left = 320
-    Top = 90
+    Left = 400
+    Top = 113
   end
   object SaveDialog1: TSaveDialog
     DefaultExt = '.bmp'
@@ -2304,13 +2305,13 @@ object Form1: TForm1
     InitialDir = 'D:\Work\lazarus\Mandelbrot-Julia\'
     OnTypeChange = SaveDialog1TypeChange
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
-    Left = 224
-    Top = 90
+    Left = 280
+    Top = 113
   end
   object Timer1: TTimer
     Enabled = False
     OnTimer = Timer1Timer
-    Left = 260
-    Top = 20
+    Left = 325
+    Top = 25
   end
 end
