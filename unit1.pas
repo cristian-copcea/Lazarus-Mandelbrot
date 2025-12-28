@@ -136,42 +136,42 @@ end;
     BitBtn3: TBitBtn;
     ColorDialog1: TColorDialog;
     Edit1: TEdit;
-    Image1: TImage;
-    Image2: TImage;
+    JuliaImage: TImage;
     Label1: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    Label13: TLabel;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label16: TLabel;
-    Label17: TLabel;
+    Mcy1curLabel: TLabel;
+    Mcx2curLabel: TLabel;
+    Mcy2curLabel: TLabel;
+    Mcx1minLabel: TLabel;
+    Mcy1minLabel: TLabel;
+    Mcx2minLabel: TLabel;
+    Mcy2minLabel: TLabel;
+    MResolutionLabel: TLabel;
     Label18: TLabel;
     Label19: TLabel;
     Label2: TLabel;
     Label20: TLabel;
-    Label21: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
+    JcxLabel: TLabel;
+    JZoomLabel: TLabel;
+    JPanXLabel: TLabel;
+    JPanYLabel: TLabel;
     Label25: TLabel;
-    Label26: TLabel;
-    Label27: TLabel;
-    Label28: TLabel;
-    Label29: TLabel;
+    MDivergenceLabel: TLabel;
+    JcyLabel: TLabel;
+    JDrawingLabel: TLabel;
+    JX1Label: TLabel;
     Label3: TLabel;
-    Label30: TLabel;
+    JX2Label: TLabel;
     Label31: TLabel;
     Label32: TLabel;
-    Label33: TLabel;
-    Label34: TLabel;
+    MZoomLabel: TLabel;
+    JDivergenceLabel: TLabel;
     Label35: TLabel;
     Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
+    MTopLeftCoordinatesLabel: TLabel;
+    MCurrentCoordinatesLabel: TLabel;
     Label7: TLabel;
-    Label9: TLabel;
+    Mcx1curLabel: TLabel;
+    MandelbrotImage: TImage;
     Panel1: TPanel;
     Panel10: TPanel;
     Panel11: TPanel;
@@ -199,21 +199,21 @@ end;
     procedure Edit1Change(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
-    procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
+    procedure MandelbrotImageMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
+    procedure MandelbrotImageMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
       );
-    procedure Image1MouseUp(Sender: TObject; Button: TMouseButton;
+    procedure MandelbrotImageMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure Image1Resize(Sender: TObject);
+    procedure MandelbrotImageResize(Sender: TObject);
 
-    procedure Image2MouseDown(Sender: TObject; Button: TMouseButton;
+    procedure JuliaImageMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure Image2MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
+    procedure JuliaImageMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
       );
-    procedure Image2MouseUp(Sender: TObject; Button: TMouseButton;
+    procedure JuliaImageMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure Image2Resize(Sender: TObject);
+    procedure JuliaImageResize(Sender: TObject);
     procedure Label32Click(Sender: TObject);
     procedure RadioGroup1SelectionChanged(Sender: TObject);
     procedure RadioGroup2SelectionChanged(Sender: TObject);
@@ -395,7 +395,7 @@ begin
                zy2 := zy*zy;
                iteration := iteration + 1;
             end;
-            //Image1.Canvas.Pixels[ix,iy]:=$FFFFFF div maxiteration*iteration;
+            //MandelbrotImage.Canvas.Pixels[ix,iy]:=$FFFFFF div maxiteration*iteration;
             ix:=localix;
             iy:=localiy;
             color:=$FFFFFF div maxiteration*iteration;
@@ -520,12 +520,12 @@ begin
   InitializeCriticalSection(ThreadLock);
   try
         if not saving then
-           Image1.Canvas.CopyRect(Rect(Amyixmin,1,Amyixmax,Amyiymax),ABitmap.Canvas,Rect(1,1,Amyixmax-Amyixmin,Amyiymax))
+           MandelbrotImage.Canvas.CopyRect(Rect(Amyixmin,1,Amyixmax,Amyiymax),ABitmap.Canvas,Rect(1,1,Amyixmax-Amyixmin,Amyiymax))
         else
            Form2.SaveImage.Canvas.CopyRect(Rect(Amyixmin,1,Amyixmax,Amyiymax),ABitmap.Canvas,Rect(1,1,Amyixmax-Amyixmin,Amyiymax));
         ProgressBar2.Position:=ProgressBar2.Position+1;
         Form1.StopTime:=now;
-        Label31.Font.Color:=clWhite - ColorToRGB(Image1.canvas.Pixels[10,10]);
+        Label31.Font.Color:=clWhite - ColorToRGB(MandelbrotImage.canvas.Pixels[10,10]);
         Label31.Caption:='Rendering Mandelbrot set: '+FloatToStrF(ProgressBar2.Position*100/ProgressBar2.Max,ffNumber,3,2)+'%; Time: '+ FormatDateTime('h"h "n"m "s"s"', Form1.StopTime-Form1.StartTime);
         ProgressBar2.Hint:=Label31.Caption;
         if ProgressBar2.Position=ProgressBar2.Max then
@@ -546,12 +546,12 @@ begin
   InitializeCriticalSection(ThreadLock);
   try
         if not saving then
-          Image2.Canvas.CopyRect(Rect(Amyixmin,1,Amyixmax,Amyiymax),ABitmap.Canvas,Rect(1,1,Amyixmax-Amyixmin,Amyiymax))
+          JuliaImage.Canvas.CopyRect(Rect(Amyixmin,1,Amyixmax,Amyiymax),ABitmap.Canvas,Rect(1,1,Amyixmax-Amyixmin,Amyiymax))
         else
           Form2.SaveImage.Canvas.CopyRect(Rect(Amyixmin,1,Amyixmax,Amyiymax),ABitmap.Canvas,Rect(1,1,Amyixmax-Amyixmin,Amyiymax));
           ProgressBar1.Position:=ProgressBar1.Position+1;
           Form1.StopTime:=now;
-          Label31.Font.Color:=clWhite - ColorToRGB(Image2.canvas.Pixels[10,10]);
+          Label31.Font.Color:=clWhite - ColorToRGB(JuliaImage.canvas.Pixels[10,10]);
           Label31.Caption:='Rendering Julia set: '+FloatToStrF(ProgressBar1.Position*100/ProgressBar1.Max,ffNumber,3,2)+'%; Time: '+ FormatDateTime('h"h "n"m "s"s"', Form1.StopTime-Form1.StartTime);
           ProgressBar1.Hint:=Label31.Caption;
           if ProgressBar1.Position=ProgressBar1.Max then
@@ -586,35 +586,40 @@ begin
 end;
 procedure TForm1.FormCreate(Sender: TObject);
 var
-  i:integer;
+  LocalCPU, i:integer;
 begin
-  if GetCPUCount() > 2 then
-     CPU:=GetCPUCount() -2
+  LocalCPU:= {$IFDEF WINDOWS} GetCPUCount(); {$ENDIF}
+             {$IFDEF UNIX}    sysconf(83);   {$ENDIF}
+  if LocalCPU > 2 then
+     CPU:=LocalCPU -2
   else
-     CPU:=GetCPUCount();
+     CPU:=LocalCPU;
   try
-  if Paramcount<>0 then
-  begin
-    if (StrToInt(paramstr(1)) <= 2*(CPU+2)) and
-       (StrToInt(paramstr(1)) <> 0) then
-           CPU:=StrToInt(paramstr(1));
-  end;
+    if Paramcount<>0 then
+    begin
+      if (StrToInt(paramstr(1)) <= 2*(CPU+2)) and
+         (StrToInt(paramstr(1)) <> 0) then
+             CPU:=StrToInt(paramstr(1));
+    end;
   except
 
   end;
+
+
+
   Caption := 'Fractals on '+IntToStr(CPU)+' threads';
   //set number or threads
   SetLength(MThreads,CPU);
   SetLength(JThreads,CPU);
   //arrange images a little bit
-  Image2.Picture.Bitmap.PixelFormat:=pf24bit;
-  Image1.Picture.Bitmap.PixelFormat:=pf24bit;
-  Image2.Align:=alClient;
-  Image1.Align:=alClient;
+  JuliaImage.Picture.Bitmap.PixelFormat:=pf24bit;
+  MandelbrotImage.Picture.Bitmap.PixelFormat:=pf24bit;
+  JuliaImage.Align:=alClient;
+  MandelbrotImage.Align:=alClient;
 
   ASaveZoom:=StrToInt(Label32.Caption);
   ThreadsDone:=True;
-  Image2.Hide;
+  JuliaImage.Hide;
   JuliaSync:=False;
   //compute number of progressbars for threads and display them on the form
   SetLength(MandelProgress,CPU);
@@ -656,10 +661,10 @@ begin
     JuliaProgress[i].Orientation:=pbVertical;
   end;
 
-  Image1.Canvas.Brush.Color:=clWhite;
-  Image1.Canvas.AutoRedraw:=True;
-  Image2.Canvas.Brush.Color:=clWhite;
-  Image2.Canvas.AutoRedraw:=True;
+  MandelbrotImage.Canvas.Brush.Color:=clWhite;
+  MandelbrotImage.Canvas.AutoRedraw:=True;
+  JuliaImage.Canvas.Brush.Color:=clWhite;
+  JuliaImage.Canvas.AutoRedraw:=True;
   UpdateDefaultParameters();
   UpdateInfo();
   x1:=1;
@@ -673,40 +678,40 @@ end;
 procedure TForm1.UpdateInfo();
 begin
   //Mandelbrot
-  Label13.Caption :='cx1='+FloatToStrF(cxminabs,ffnumber,2,6);
-  Label15.Caption :='cx2='+FloatToStrF(cxmaxabs,ffnumber,2,6);
-  Label14.Caption :='cy1='+FloatToStrF(cyminabs,ffnumber,2,6);
-  Label16.Caption :='cy2='+FloatToStrF(cymaxabs,ffnumber,2,6);
-  Label13.Hint :='cx1='+FloatToStrF(cxminabs,ffnumber,2,22);
-  Label15.Hint :='cx2='+FloatToStrF(cxmaxabs,ffnumber,2,22);
-  Label14.Hint :='cy1='+FloatToStrF(cyminabs,ffnumber,2,22);
-  Label16.Hint :='cy2='+FloatToStrF(cymaxabs,ffnumber,2,22);
-  Label9.Caption  :='cx1='+FloatToStrF(cxmin,ffnumber,2,4);
-  Label11.Caption :='cx2='+FloatToStrF(cxmax,ffnumber,2,4);
-  Label10.Caption :='cy1='+FloatToStrF(cymin,ffnumber,2,4);
-  Label12.Caption :='cy2='+FloatToStrF(cymax,ffnumber,2,4);
-  Label9.Hint  :='cx1='+FloatToStrF(cxmin,ffnumber,2,22);
-  Label11.Hint :='cx2='+FloatToStrF(cxmax,ffnumber,2,22);
-  Label10.Hint :='cy1='+FloatToStrF(cymin,ffnumber,2,22);
-  Label12.Hint :='cy2='+FloatToStrF(cymax,ffnumber,2,22);
-  Label5.Caption  :='Top Left: ('+IntToStr(x1)+', '+IntToStr(y1)+')';
-  Label6.Caption  :='Current:  ('+IntToStr(x2)+', '+IntToStr(y2)+')';
-  Label17.Caption :='Resolution: '+IntToStr(ixmax)+' x '+IntToStr(iymax)+ ' pixels';
-  Label33.Caption :='Zoom='+FloatToStrF(MZoom,ffnumber,2,2);
+  Mcx1minLabel.Caption :='cx1='+FloatToStrF(cxminabs,ffnumber,2,6);
+  Mcx2minLabel.Caption :='cx2='+FloatToStrF(cxmaxabs,ffnumber,2,6);
+  Mcy1minLabel.Caption :='cy1='+FloatToStrF(cyminabs,ffnumber,2,6);
+  Mcy2minLabel.Caption :='cy2='+FloatToStrF(cymaxabs,ffnumber,2,6);
+  Mcx1minLabel.Hint :='cx1='+FloatToStrF(cxminabs,ffnumber,2,22);
+  Mcx2minLabel.Hint :='cx2='+FloatToStrF(cxmaxabs,ffnumber,2,22);
+  Mcy1minLabel.Hint :='cy1='+FloatToStrF(cyminabs,ffnumber,2,22);
+  Mcy2minLabel.Hint :='cy2='+FloatToStrF(cymaxabs,ffnumber,2,22);
+  Mcx1curLabel.Caption  :='cx1='+FloatToStrF(cxmin,ffnumber,2,4);
+  Mcx2curLabel.Caption :='cx2='+FloatToStrF(cxmax,ffnumber,2,4);
+  Mcy1curLabel.Caption :='cy1='+FloatToStrF(cymin,ffnumber,2,4);
+  Mcy2curLabel.Caption :='cy2='+FloatToStrF(cymax,ffnumber,2,4);
+  Mcx1curLabel.Hint  :='cx1='+FloatToStrF(cxmin,ffnumber,2,22);
+  Mcx2curLabel.Hint :='cx2='+FloatToStrF(cxmax,ffnumber,2,22);
+  Mcy1curLabel.Hint :='cy1='+FloatToStrF(cymin,ffnumber,2,22);
+  Mcy2curLabel.Hint :='cy2='+FloatToStrF(cymax,ffnumber,2,22);
+  MTopLeftCoordinatesLabel.Caption  :='Top Left: ('+IntToStr(x1)+', '+IntToStr(y1)+')';
+  MCurrentCoordinatesLabel.Caption  :='Current:  ('+IntToStr(x2)+', '+IntToStr(y2)+')';
+  MResolutionLabel.Caption :='Resolution: '+IntToStr(ixmax)+' x '+IntToStr(iymax)+ ' pixels';
+  MZoomLabel.Caption :='Zoom='+FloatToStrF(MZoom,ffnumber,2,2);
   //Julia
-  Label21.Caption :='cx='+FloatToStrF(jcx,ffnumber,2,22);
-  Label27.Caption :='cy='+FloatToStrF(jcy,ffnumber,2,22);
-  Label29.Caption :='Top Left: ('+IntToStr(jx1)+', '+IntToStr(jy1)+')';
-  Label30.Caption :='Current:  ('+IntToStr(jx2)+', '+IntToStr(jy2)+')';
-  Label22.Caption :='Zoom='+FloatToStrF(Zoom,ffnumber,2,2);
-  Label23.Caption :='Pan X='+FloatToStrF(MoveX,ffnumber,2,2);
-  Label24.Caption :='Pan Y='+FloatToStrF(MoveY,ffnumber,2,2);
-  Label23.Hint :='Pan X='+FloatToStrF(MoveX,ffnumber,2,22);
-  Label24.Hint :='Pan Y='+FloatToStrF(MoveY,ffnumber,2,22);
+  JcxLabel.Caption :='cx='+FloatToStrF(jcx,ffnumber,2,22);
+  JcyLabel.Caption :='cy='+FloatToStrF(jcy,ffnumber,2,22);
+  JX1Label.Caption :='Top Left: ('+IntToStr(jx1)+', '+IntToStr(jy1)+')';
+  JX2Label.Caption :='Current:  ('+IntToStr(jx2)+', '+IntToStr(jy2)+')';
+  JZoomLabel.Caption :='Zoom='+FloatToStrF(Zoom,ffnumber,2,2);
+  JPanXLabel.Caption :='Pan X='+FloatToStrF(MoveX,ffnumber,2,2);
+  JPanYLabel.Caption :='Pan Y='+FloatToStrF(MoveY,ffnumber,2,2);
+  JPanXLabel.Hint :='Pan X='+FloatToStrF(MoveX,ffnumber,2,22);
+  JPanYLabel.Hint :='Pan Y='+FloatToStrF(MoveY,ffnumber,2,22);
 
   if JuliaSync then
   begin
-    Label28.Caption:='Drawing Corresponding Julia Set With:';
+    JDrawingLabel.Caption:='Drawing Corresponding Julia Set With:';
     RadioGroup1.Items[1]:='Corresponding Julia Set';
     Panel8.Font.Color:=clRed;
     Panel7.BevelColor:=clRed;
@@ -715,11 +720,11 @@ begin
     Panel14.BevelColor:=clRed;
     Label7.Font.Color:=clRed;
     Label20.Font.Color:=clRed;
-    Label28.Font.Color:=clRed;
+    JDrawingLabel.Font.Color:=clRed;
   end
   else
   begin
-    Label28.Caption:='Drawing Default Julia Set With:';
+    JDrawingLabel.Caption:='Drawing Default Julia Set With:';
     RadioGroup1.Items[1]:='Default Julia Set';
     Panel8.Font.Color:=clGreen;
     Panel7.BevelColor:=clGreen;
@@ -728,21 +733,21 @@ begin
     Panel14.BevelColor:=clGreen;
     Label7.Font.Color:=clGreen;
     Label20.Font.Color:=clGreen;
-    Label28.Font.Color:=clGreen;
+    JDrawingLabel.Font.Color:=clGreen;
   end;
 end;
 
 procedure TForm1.UpdateInfoNonCommitted(acx1,acx2,acy1,acy2:extended);
 begin
   //Mandelbrot
-  Label9.Caption  :='cx1='+FloatToStrF(acx1,ffnumber,2,4);
-  Label11.Caption :='cx2='+FloatToStrF(acx2,ffnumber,2,4);
-  Label10.Caption :='cy1='+FloatToStrF(acy1,ffnumber,2,4);
-  Label12.Caption :='cy2='+FloatToStrF(acy2,ffnumber,2,4);
-  Label9.Hint  :='cx1='+FloatToStrF(acx1,ffnumber,2,22);
-  Label11.Hint :='cx2='+FloatToStrF(acx2,ffnumber,2,22);
-  Label10.Hint :='cy1='+FloatToStrF(acy1,ffnumber,2,22);
-  Label12.Hint :='cy2='+FloatToStrF(acy2,ffnumber,2,22);
+  Mcx1curLabel.Caption  :='cx1='+FloatToStrF(acx1,ffnumber,2,4);
+  Mcx2curLabel.Caption :='cx2='+FloatToStrF(acx2,ffnumber,2,4);
+  Mcy1curLabel.Caption :='cy1='+FloatToStrF(acy1,ffnumber,2,4);
+  Mcy2curLabel.Caption :='cy2='+FloatToStrF(acy2,ffnumber,2,4);
+  Mcx1curLabel.Hint  :='cx1='+FloatToStrF(acx1,ffnumber,2,22);
+  Mcx2curLabel.Hint :='cx2='+FloatToStrF(acx2,ffnumber,2,22);
+  Mcy1curLabel.Hint :='cy1='+FloatToStrF(acy1,ffnumber,2,22);
+  Mcy2curLabel.Hint :='cy2='+FloatToStrF(acy2,ffnumber,2,22);
 end;
 procedure TForm1.UpdateDefaultParameters();
 begin
@@ -766,7 +771,7 @@ begin
 end;
 
 
-procedure TForm1.Image1MouseDown(Sender: TObject; Button: TMouseButton;
+procedure TForm1.MandelbrotImageMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if saving then exit;
@@ -793,13 +798,13 @@ case Button of
           end
           else
           begin
-            cxmin := x1/(Image1.Width/(cxmaxabs-cxminabs))-cxmaxabs;
-            cxmax := x2/(Image1.Width/(cxmaxabs-cxminabs))-cxmaxabs;
-            cymin := - (y1/(Image1.Height/(cymaxabs-cyminabs)) - cymaxabs);
-            cymax := - (y2/(Image1.Height/(cymaxabs-cyminabs)) - cymaxabs);
+            cxmin := x1/(MandelbrotImage.Width/(cxmaxabs-cxminabs))-cxmaxabs;
+            cxmax := x2/(MandelbrotImage.Width/(cxmaxabs-cxminabs))-cxmaxabs;
+            cymin := - (y1/(MandelbrotImage.Height/(cymaxabs-cyminabs)) - cymaxabs);
+            cymax := - (y2/(MandelbrotImage.Height/(cymaxabs-cyminabs)) - cymaxabs);
             UpdateInfo();
           end;
-          Shape1.Canvas.CopyRect(Rect(0,0,Shape1.Width,Shape1.Height),Image1.Canvas,Rect(x1,y1,x2,y2));
+          Shape1.Canvas.CopyRect(Rect(0,0,Shape1.Width,Shape1.Height),MandelbrotImage.Canvas,Rect(x1,y1,x2,y2));
        end;
     end;
   mbRight:
@@ -815,14 +820,14 @@ case Button of
       RadioGroup1.ItemIndex:=1;
       UpdateInfo();
       sleep(1000);
-      //weird happening: mouse down on Image1 triggers Mouse up on Image2
+      //weird happening: mouse down on MandelbrotImage triggers Mouse up on JuliaImage
       //Setting the above tells the system the mouse was pressed on Mandelbrot.
       Form1.MouseDownFromMandelbrot:=True;
     end;
   end;
 end;
 
-procedure TForm1.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
+procedure TForm1.MandelbrotImageMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
 var
   divergence: string;
@@ -837,9 +842,9 @@ begin
        end
     else
        begin
-         divergence:=(Self.Image1.Canvas.Pixels[X,Y]*StrToInt(Edit1.Text) div $FFFFFF).ToString;
+         divergence:=(Self.MandelbrotImage.Canvas.Pixels[X,Y]*StrToInt(Edit1.Text) div $FFFFFF).ToString;
          if divergence.ToInteger()/StrToInt(Edit1.Text)> 0.9999 then divergence:='none';
-         Label26.Caption:='Divergence: '+divergence;
+         MDivergenceLabel.Caption:='Divergence: '+divergence;
 
          x2 := X;
          y2 := Y;
@@ -852,25 +857,25 @@ begin
          else
          if Shift = [ssShift, ssLeft] then
          begin
-            cxmin := x1/(Image1.Width/(cxmaxabs-cxminabs))-cxmaxabs;
-            cxmax := x2/(Image1.Width/(cxmaxabs-cxminabs))-cxmaxabs;
-            cymin := - (y1/(Image1.Height/(cymaxabs-cyminabs)) - cymaxabs);
-            cymax := - (y2/(Image1.Height/(cymaxabs-cyminabs)) - cymaxabs);
+            cxmin := x1/(MandelbrotImage.Width/(cxmaxabs-cxminabs))-cxmaxabs;
+            cxmax := x2/(MandelbrotImage.Width/(cxmaxabs-cxminabs))-cxmaxabs;
+            cymin := - (y1/(MandelbrotImage.Height/(cymaxabs-cyminabs)) - cymaxabs);
+            cymax := - (y2/(MandelbrotImage.Height/(cymaxabs-cyminabs)) - cymaxabs);
             UpdateInfo();
             //Shape1.Canvas.Unlock;
             Shape1.Left:=x1;
             Shape1.Top:=y1;
             Shape1.Width:=x2-x1;
             Shape1.Height:=y2-y1;
-            //Shape1.Canvas.CopyRect(Rect(0,0,Shape1.Width,Shape1.Height),Image1.Canvas,Rect(x1,y1,x2,y2));
+            //Shape1.Canvas.CopyRect(Rect(0,0,Shape1.Width,Shape1.Height),MandelbrotImage.Canvas,Rect(x1,y1,x2,y2));
             //Shape1.Canvas.Lock;
          end
        else
        begin
-          acxmin := x1/(Image1.Width/(cxmaxabs-cxminabs))-cxmaxabs;
-          acxmax := x2/(Image1.Width/(cxmaxabs-cxminabs))-cxmaxabs;
-          acymin := - (y1/(Image1.Height/(cymaxabs-cyminabs)) - cymaxabs);
-          acymax := - (y2/(Image1.Height/(cymaxabs-cyminabs)) - cymaxabs);
+          acxmin := x1/(MandelbrotImage.Width/(cxmaxabs-cxminabs))-cxmaxabs;
+          acxmax := x2/(MandelbrotImage.Width/(cxmaxabs-cxminabs))-cxmaxabs;
+          acymin := - (y1/(MandelbrotImage.Height/(cymaxabs-cyminabs)) - cymaxabs);
+          acymax := - (y2/(MandelbrotImage.Height/(cymaxabs-cyminabs)) - cymaxabs);
           UpdateInfo();
           UpdateInfoNonCommitted(acxmin,acxmax,acymin,acymax);
        end;
@@ -879,7 +884,7 @@ begin
        end;
 end;
 
-procedure TForm1.Image1MouseUp(Sender: TObject; Button: TMouseButton;
+procedure TForm1.MandelbrotImageMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if saving then exit;
@@ -902,16 +907,16 @@ begin
   end;
 end;
 
-procedure TForm1.Image1Resize(Sender: TObject);
+procedure TForm1.MandelbrotImageResize(Sender: TObject);
 begin
-  ixmax:=Image1.Width;
-  iymax:=Image1.Height;
-  Image1.Picture.Bitmap.SetSize(ixmax, iymax);
+  ixmax:=MandelbrotImage.Width;
+  iymax:=MandelbrotImage.Height;
+  MandelbrotImage.Picture.Bitmap.SetSize(ixmax, iymax);
 
 end;
 
 
-procedure TForm1.Image2MouseDown(Sender: TObject; Button: TMouseButton;
+procedure TForm1.JuliaImageMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
 //Julia
@@ -935,7 +940,7 @@ begin
   end;
 end;
 
-procedure TForm1.Image2MouseMove(Sender: TObject; Shift: TShiftState; X,
+procedure TForm1.JuliaImageMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
 var
   divergence:String;
@@ -952,9 +957,9 @@ begin
     else
     if (jy2=0) then
        jy2:=1;
-    divergence:=(Self.Image2.Canvas.Pixels[X,Y]*StrToInt(Edit1.Text) div $FFFFFF).ToString;
+    divergence:=(Self.JuliaImage.Canvas.Pixels[X,Y]*StrToInt(Edit1.Text) div $FFFFFF).ToString;
     if divergence.ToInteger()/StrToInt(Edit1.Text)> 0.9999 then divergence:='none';
-    Label34.Caption:='Divergence: '+divergence;
+    JDivergenceLabel.Caption:='Divergence: '+divergence;
     UpdateInfo();
     Shape1.Left:=jx1;
     Shape1.Top:=jy1;
@@ -962,7 +967,7 @@ begin
     Shape1.Height:=jy2-jy1;
 end;
 
-procedure TForm1.Image2MouseUp(Sender: TObject; Button: TMouseButton;
+procedure TForm1.JuliaImageMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 
 begin
@@ -1000,8 +1005,8 @@ begin
     end;
    mbRight:
    begin
-    //this only happens when middle button is clicked on Image1 but MouseUp event happens on Image2
-     //actually it happens also on right click on Image2 but it has no effect, just a redraw
+    //this only happens when middle button is clicked on MandelbrotImage but MouseUp event happens on JuliaImage
+     //actually it happens also on right click on JuliaImage but it has no effect, just a redraw
     if Form1.MouseDownFromMandelbrot then //Julia Draw with Mandelbrot correspondent
        BitBtn2Click(Nil)
     else
@@ -1011,8 +1016,8 @@ begin
        //BitBtn2Click(Nil);   actually if Mandelbrot is already drawn we could just flip the images :)
        if JuliaSync then
        begin
-         image2.Hide;
-         image1.Show;
+         JuliaImage.Hide;
+         MandelbrotImage.Show;
        end
        else
         BitBtn2Click(Nil);
@@ -1023,11 +1028,11 @@ end;
 
 
 
-procedure TForm1.Image2Resize(Sender: TObject);
+procedure TForm1.JuliaImageResize(Sender: TObject);
 begin
-  ixmax:=Image2.Width;
-  iymax:=Image2.Height;
-  Image2.Picture.Bitmap.SetSize(ixmax, iymax);
+  ixmax:=JuliaImage.Width;
+  iymax:=JuliaImage.Height;
+  JuliaImage.Picture.Bitmap.SetSize(ixmax, iymax);
 end;
 
 procedure TForm1.Label32Click(Sender: TObject);
@@ -1040,13 +1045,13 @@ begin
   case RadioGroup1.ItemIndex of
     1:
     begin
-      Image1.Hide;
-      Image2.Show;
+      MandelbrotImage.Hide;
+      JuliaImage.Show;
     end;
     0:
     begin
-      Image1.Show;
-      Image2.Hide;
+      MandelbrotImage.Show;
+      JuliaImage.Hide;
     end;
   end;
 end;
@@ -1077,14 +1082,14 @@ begin
     J:
     begin
       StopTime:=now;
-      Label31.Font.Color:=clWhite - ColorToRGB(Image2.canvas.Pixels[10,10]);
+      Label31.Font.Color:=clWhite - ColorToRGB(JuliaImage.canvas.Pixels[10,10]);
       Label31.Caption:='Rendering Julia set: '+FloatToStrF(ProgressBar1.Position*100/ProgressBar1.Max,ffNumber,3,2)+'%; Time: '+ FormatDateTime('h"h "n"m "s"s"', Form1.StopTime-Form1.StartTime);
       ProgressBar1.Hint:=Label31.Caption;
     end;
     M:
     begin
       StopTime:=now;
-      Label31.Font.Color:=clWhite - ColorToRGB(Image1.canvas.Pixels[10,10]);
+      Label31.Font.Color:=clWhite - ColorToRGB(MandelbrotImage.canvas.Pixels[10,10]);
       Label31.Caption:='Rendering Mandelbrot set: '+FloatToStrF(ProgressBar2.Position*100/ProgressBar2.Max,ffNumber,3,2)+'%; Time: '+ FormatDateTime('h"h "n"m "s"s"', Form1.StopTime-Form1.StartTime);
       ProgressBar2.Hint:=Label31.Caption;
     end;
@@ -1242,7 +1247,7 @@ begin
   Form1.BorderIcons:=[];
   Jpg := TJPEGImage.Create;
   Saving:=true;
-  if Image1.Visible=True then
+  if MandelbrotImage.Visible=True then
   begin
      SaveDialog1.FileName:='Mandelbrot Set with ' +
      Edit1.Text +
@@ -1275,11 +1280,11 @@ begin
   end;
   if ASaveZoom<>1 then
   begin
-     SaveDialog1.Title:='Save zoomed x'+ASaveZoom.ToString+' ('+(Image1.Width*ASaveZoom).ToString()+'x'+(Image1.Height*ASaveZoom).ToString()+') image';
+     SaveDialog1.Title:='Save zoomed x'+ASaveZoom.ToString+' ('+(MandelbrotImage.Width*ASaveZoom).ToString()+'x'+(MandelbrotImage.Height*ASaveZoom).ToString()+') image';
      SaveDialog1.FileName:=SaveDialog1.FileName + ' zoomed x' + ASaveZoom.ToString;
   end
   else
-      SaveDialog1.Title:='Save original ('+Image1.Width.ToString()+'x'+Image1.Height.ToString()+') image';
+      SaveDialog1.Title:='Save original ('+MandelbrotImage.Width.ToString()+'x'+MandelbrotImage.Height.ToString()+') image';
   if SaveDialog1.Execute then
   begin
     case SaveDialog1.FilterIndex of
@@ -1289,10 +1294,10 @@ begin
         begin
              oldixmax:=ixmax;
              oldiymax:=iymax;
-             Form2.Width:=Image1.Width*ASaveZoom+Form2.BorderWidth*2;
-             Form2.height:=Image1.Height*ASaveZoom+Form2.BorderWidth*2;
-             Form2.SaveImage.Width:=Image1.Width*ASaveZoom;
-             Form2.SaveImage.height:=Image1.Height*ASaveZoom;
+             Form2.Width:=MandelbrotImage.Width*ASaveZoom+Form2.BorderWidth*2;
+             Form2.height:=MandelbrotImage.Height*ASaveZoom+Form2.BorderWidth*2;
+             Form2.SaveImage.Width:=MandelbrotImage.Width*ASaveZoom;
+             Form2.SaveImage.height:=MandelbrotImage.Height*ASaveZoom;
              Form2.SaveImage.Picture.Bitmap.SetSize(Form2.Width,Form2.Height);
              Form2.SaveImage.Picture.Bitmap.SetSize(Form2.Width, Form2.Height);
              Form2.button.Left:=Form2.Width+1;
@@ -1305,8 +1310,8 @@ begin
              Form2.SaveImage.Picture.Bitmap.SaveToFile(SaveDialog1.FileName);
              Form2.Width:=800;
              Form2.height:=600;
-             Form2.SaveImage.Width:=Image1.Width*ASaveZoom;
-             Form2.SaveImage.height:=Image1.Height*ASaveZoom;
+             Form2.SaveImage.Width:=MandelbrotImage.Width*ASaveZoom;
+             Form2.SaveImage.height:=MandelbrotImage.Height*ASaveZoom;
              Form2.SaveImage.Picture.Bitmap.SetSize(Form2.Width,Form2.Height);
              Form2.SaveImage.Picture.Bitmap.SetSize(Form2.Width, Form2.Height);
              Form2.button.Left:=Form2.Width+1;
@@ -1314,10 +1319,10 @@ begin
         end
         else
         begin
-          if Image1.Visible then
-             Image1.Picture.Bitmap.SaveToFile(SaveDialog1.FileName)
+          if MandelbrotImage.Visible then
+             MandelbrotImage.Picture.Bitmap.SaveToFile(SaveDialog1.FileName)
           else
-             Image2.Picture.Bitmap.SaveToFile(SaveDialog1.FileName);
+             JuliaImage.Picture.Bitmap.SaveToFile(SaveDialog1.FileName);
 
         end;
       end;
@@ -1327,10 +1332,10 @@ begin
         begin
           oldixmax:=ixmax;
           oldiymax:=iymax;
-          Form2.Width:=Image1.Width*ASaveZoom+Form2.BorderWidth*2;
-          Form2.height:=Image1.Height*ASaveZoom+Form2.BorderWidth*2;
-          Form2.SaveImage.Width:=Image1.Width*ASaveZoom;
-          Form2.SaveImage.height:=Image1.Height*ASaveZoom;
+          Form2.Width:=MandelbrotImage.Width*ASaveZoom+Form2.BorderWidth*2;
+          Form2.height:=MandelbrotImage.Height*ASaveZoom+Form2.BorderWidth*2;
+          Form2.SaveImage.Width:=MandelbrotImage.Width*ASaveZoom;
+          Form2.SaveImage.height:=MandelbrotImage.Height*ASaveZoom;
           Form2.SaveImage.Picture.Bitmap.SetSize(Form2.Width,Form2.Height);
           Form2.SaveImage.Picture.Bitmap.SetSize(Form2.Width, Form2.Height);
           Form2.button.Left:=Form2.Width+1;
@@ -1346,8 +1351,8 @@ begin
           Jpg.SaveToFile(SaveDialog1.FileName);
           Form2.Width:=800;
           Form2.height:=600;
-          Form2.SaveImage.Width:=Image1.Width*ASaveZoom;
-          Form2.SaveImage.height:=Image1.Height*ASaveZoom;
+          Form2.SaveImage.Width:=MandelbrotImage.Width*ASaveZoom;
+          Form2.SaveImage.height:=MandelbrotImage.Height*ASaveZoom;
           Form2.SaveImage.Picture.Bitmap.SetSize(Form2.Width,Form2.Height);
           Form2.SaveImage.Picture.Bitmap.SetSize(Form2.Width, Form2.Height);
           Form2.button.Left:=Form2.Width+1;
@@ -1356,10 +1361,10 @@ begin
         else
         begin
            Jpg := TJPEGImage.Create;
-          if Image1.Visible then
-             Jpg.Assign(Image1.Picture.Graphic)
+          if MandelbrotImage.Visible then
+             Jpg.Assign(MandelbrotImage.Picture.Graphic)
           else
-             Jpg.Assign(Image2.Picture.Graphic);
+             Jpg.Assign(JuliaImage.Picture.Graphic);
           Jpg.CompressionQuality := 100;
           Jpg.SaveToFile(SaveDialog1.FileName);
         end;
