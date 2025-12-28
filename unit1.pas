@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Buttons,
-  StdCtrls, ComCtrls, LCLIntf, LCLType, ActnList, Menus, Math, Types, unit2 ;
+  StdCtrls, ComCtrls, LCLIntf, LCLType, ActnList, Menus, Math, Types, unit2 {$IFDEF UNIX},initc,ctypes {$ENDIF};
 
 type
   //composite data used to initialize Mandelbrot threads
@@ -584,7 +584,12 @@ begin
   BitBtn3.Enabled:=false;
   Timer1.Enabled:=true;
 end;
+{$IFDEF UNIX}
+function sysconf(i:cint):clong;cdecl;external name 'sysconf';
+{$ENDIF}
+
 procedure TForm1.FormCreate(Sender: TObject);
+
 var
   LocalCPU, i:integer;
 begin
