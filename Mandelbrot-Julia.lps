@@ -63,6 +63,15 @@
             </Debugging>
             <LinkSmart Value="True"/>
           </Linking>
+          <Other>
+            <CustomOptions Value="-CfAVX
+-CpCOREAVX
+-CX
+-O4
+-OpCOREAVX
+-Sv
+-XX"/>
+          </Other>
         </CompilerOptions>
       </Item>
     </BuildModes>
