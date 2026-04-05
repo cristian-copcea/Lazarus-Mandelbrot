@@ -136,6 +136,7 @@ end;
     BitBtn3: TBitBtn;
     ColorDialog1: TColorDialog;
     Edit1: TEdit;
+    ImageList1: TImageList;
     JuliaImage: TImage;
     Label1: TLabel;
     Mcy1curLabel: TLabel;
@@ -192,6 +193,8 @@ end;
     SaveDialog1: TSaveDialog;
     ScrollBox1: TScrollBox;
     Shape1: TShape;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
     Timer1: TTimer;
     UpDown1: TUpDown;
     procedure BitBtn2Click(Sender: TObject);
@@ -218,6 +221,7 @@ end;
     procedure RadioGroup1SelectionChanged(Sender: TObject);
     procedure RadioGroup2SelectionChanged(Sender: TObject);
     procedure SaveDialog1TypeChange(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure UpDown1ChangingEx(Sender: TObject; var AllowChange: Boolean;
       NewValue: SmallInt; Direction: TUpDownDirection);
@@ -237,7 +241,7 @@ end;
   ASaveZoom:integer;            //zoom used for the saved image
   ThreadsDone:boolean;          //all threads terminated their job
   TimerSet: (J,M);              //needed to properly write the time elapsed for M or J
-
+  VisibleControlPanel: boolean;
   //Mandelbrot specific variables
   x1,x2,y1,y2:integer;                       //viewport coordinates
   cxmin, cxmax, cymin, cymax : extended;     //c range to plot
@@ -609,7 +613,7 @@ begin
   except
 
   end;
-
+  VisibleControlPanel:=true;
 
 
   Caption := 'Fractals on '+IntToStr(CPU)+' threads';
@@ -1079,6 +1083,29 @@ begin
   sa := SaveDialog1.Filter.Split('|');
   index := (SaveDialog1.FilterIndex - 1) * 2;
   SaveDialog1.DefaultExt := sa[index];
+end;
+
+procedure TForm1.SpeedButton2Click(Sender: TObject);
+var i: integer;
+begin
+  VisibleControlPanel:=not VisibleControlPanel;
+  Panel4.Visible:=VisibleControlPanel;
+
+  if Panel4.Visible then
+  begin
+      Panel3.Width:=478;
+      SpeedButton2.Left:=432;
+      SpeedButton2.ImageIndex:=1;
+      SpeedButton2.Hint:='Hide Control Panel';
+  end
+  else
+  begin
+        Panel3.Width:=50;
+        SpeedButton2.Left:=5;
+        SpeedButton2.ImageIndex:=0;
+        SpeedButton2.Hint:='Show Control Panel'
+  end;
+
 end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);

@@ -1,11 +1,10 @@
 object Form1: TForm1
-  Left = 171
-  Height = 790
-  Top = 136
+  Left = 457
+  Height = 819
+  Top = 177
   Width = 1268
-  ActiveControl = Edit1
   Caption = 'Fractals'
-  ClientHeight = 790
+  ClientHeight = 819
   ClientWidth = 1268
   DefaultMonitor = dmMainForm
   DesignTimePPI = 120
@@ -1620,19 +1619,19 @@ object Form1: TForm1
   OnCreate = FormCreate
   object Panel2: TPanel
     Left = 0
-    Height = 790
+    Height = 819
     Top = 0
     Width = 790
     Align = alClient
     AutoSize = True
     BevelInner = bvLowered
     BorderStyle = bsSingle
-    ClientHeight = 786
+    ClientHeight = 815
     ClientWidth = 786
     TabOrder = 0
     object ScrollBox1: TScrollBox
       Left = 2
-      Height = 782
+      Height = 811
       Top = 2
       Width = 782
       HorzScrollBar.Increment = 23
@@ -1640,7 +1639,7 @@ object Form1: TForm1
       VertScrollBar.Increment = 22
       VertScrollBar.Page = 363
       Align = alClient
-      ClientHeight = 778
+      ClientHeight = 807
       ClientWidth = 778
       TabOrder = 0
       object MandelbrotImage: TImage
@@ -1674,7 +1673,7 @@ object Form1: TForm1
       object Shape1: TShape
         Left = 196
         Height = 160
-        Top = 327
+        Top = 342
         Width = 188
         Anchors = []
         Brush.Color = clNone
@@ -1697,23 +1696,22 @@ object Form1: TForm1
   end
   object Panel3: TPanel
     Left = 790
-    Height = 790
+    Height = 819
     Top = 0
     Width = 478
     Align = alRight
     BevelInner = bvLowered
     BorderStyle = bsSingle
-    ClientHeight = 786
+    ClientHeight = 815
     ClientWidth = 474
     TabOrder = 1
     object Panel4: TPanel
       Left = 2
-      Height = 782
+      Height = 766
       Top = 2
       Width = 470
-      Align = alClient
       BevelInner = bvRaised
-      ClientHeight = 782
+      ClientHeight = 766
       ClientWidth = 470
       TabOrder = 0
       object Panel5: TPanel
@@ -1979,7 +1977,7 @@ object Form1: TForm1
           Left = 10
           Height = 64
           Top = 101
-          Width = 240
+          Width = 222
           AutoFill = True
           Caption = 'Color Pallette'
           ChildSizing.LeftRightSpacing = 6
@@ -1990,7 +1988,7 @@ object Form1: TForm1
           ChildSizing.Layout = cclTopToBottomThenLeftToRight
           ChildSizing.ControlsPerLine = 1
           ClientHeight = 39
-          ClientWidth = 236
+          ClientWidth = 218
           ColumnLayout = clVerticalThenHorizontal
           Columns = 4
           ItemIndex = 0
@@ -2077,10 +2075,10 @@ object Form1: TForm1
           ParentFont = False
         end
         object Edit1: TEdit
-          Left = 300
+          Left = 248
           Height = 28
           Hint = 'Input divergence iterations'
-          Top = 130
+          Top = 128
           Width = 129
           NumbersOnly = True
           ParentShowHint = False
@@ -2090,7 +2088,7 @@ object Form1: TForm1
           OnChange = Edit1Change
         end
         object Label4: TLabel
-          Left = 260
+          Left = 245
           Height = 20
           Top = 100
           Width = 148
@@ -2111,6 +2109,13 @@ object Form1: TForm1
           ParentShowHint = False
           ShowHint = True
           OnClick = Label32Click
+        end
+        object SpeedButton1: TSpeedButton
+          Left = 400
+          Height = 40
+          Top = 116
+          Width = 48
+          Caption = 'Hide'
         end
       end
       object Panel7: TPanel
@@ -2270,6 +2275,18 @@ object Form1: TForm1
         end
       end
     end
+    object SpeedButton2: TSpeedButton
+      Left = 432
+      Height = 28
+      Hint = 'Hide Control Panel'
+      Top = 776
+      Width = 29
+      Images = ImageList1
+      ImageIndex = 0
+      ShowHint = True
+      ParentShowHint = False
+      OnClick = SpeedButton2Click
+    end
   end
   object ColorDialog1: TColorDialog
     Color = clBlack
@@ -2313,5 +2330,31 @@ object Form1: TForm1
     OnTimer = Timer1Timer
     Left = 325
     Top = 25
+  end
+  object ImageList1: TImageList
+    Left = 1176
+    Top = 776
+    Bitmap = {
+      4C7A0200000010000000100000005A0200000000000078DAA5954B6E13411086
+      B923425922C42112601DCFCB9682C921B05919B26393D827800C06B20A9BB0F2
+      BC1FD915F557778DC7332D64292D95C64AFC75D574D7575E5D7D79761EFA741E
+      7184262661FF734013FC2FC2731F1EC7CAB25FD7D75D609F63D7641AD29047EE
+      F6B1A5A67DE468A96E1A89AA46D4545535956569F940F28DF943F6F7DD9D61EB
+      8A8AAAA442F92894EF1FF0BC1FD8A635ECF6D74F7AF9FA1595609943EEBC30BC
+      27F50783F70FA86994DDD2F393178697BCD8A360BEF82FDF67953F7BF7962E2E
+      E7B4F8B4A49BCD861EFE3E088FBB38AC3F909A95DDF36FE8E283F26BE1FDA9EB
+      FD038AB7DB117F2AFC7BFAB85CD2F5FAC6F0B348EAEDF3E88BB2AA288E7F8CF9
+      39F38B45C77BD36854BFC777021E677D1BC71D9FE639A55946699A5192A6E6FC
+      66631E3D01B6284A39E76FB7DF0DCF6C92A5C2EED24478DFC98794DB3BCA728E
+      2CA7FB3FF7CC99BC49C27C92F4F28787F583075BE4C24A5E65392FD8DD6ED7E5
+      F71CEF7FEC020F07B107EA46785D44DD677F66FF862733BE8DD5D5E7CEE1A7F8
+      7FB4EF8EB3561ECEEEC3EDBFEBAE75DE280B0E4FDC99B286AF1DAE98FEDFF39C
+      5772B7D233E89DCAB2F07FD4ABD65FACC6CE1C0966C0A377D1C3256616FB8FEF
+      BB78B80027E0061C812BCA23E0127ADA9B8EF3A3A68E6737E1E890973DD8E9C9
+      8057FFC16326603660469C3978CC94617EF5DFF01BC35FCE6556F579CCB28CFD
+      F5B9270FEB37FE61554D6DCE99DD47286FD842FC1F9DDFACC7DB3BD2D9011E35
+      0B6B3D1CE6F77BBCB03ADFD97FFC66A8FFEAB037ACDFFA8F55D8BC3ADF5DFE0F
+      EB57FF8FF6DD51FF53FDFF07A2B05BDD
+    }
   end
 end
