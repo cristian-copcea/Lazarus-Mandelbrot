@@ -93,7 +93,7 @@
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="1076"/>
-        <CursorPos X="33" Y="1106"/>
+        <CursorPos X="29" Y="1097"/>
         <ExtraEditorCount Value="1"/>
         <ExtraEditor1>
           <EditorIndex Value="-1"/>
@@ -249,7 +249,7 @@
     <Debugger>
       <Backend Value="{2DEF1EA0-3C6F-4D8B-976C-3CA1417A66CF}"/>
     </Debugger>
-    <JumpHistory HistoryIndex="29">
+    <JumpHistory HistoryIndex="28">
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="244" Column="9" TopLine="215"/>
@@ -345,10 +345,6 @@
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="574" Column="50" TopLine="568"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="242" Column="32" TopLine="301"/>
       </Position>
       <Position>
         <Filename Value="unit1.pas"/>

@@ -1093,15 +1093,15 @@ begin
 
   if Panel4.Visible then
   begin
-      Panel3.Width:=478;
-      SpeedButton2.Left:=432;
+      Panel3.Width:=382;
+      SpeedButton2.Left:=345;
       SpeedButton2.ImageIndex:=1;
       SpeedButton2.Hint:='Hide Control Panel';
   end
   else
   begin
         Panel3.Width:=50;
-        SpeedButton2.Left:=5;
+        SpeedButton2.Left:=10;
         SpeedButton2.ImageIndex:=0;
         SpeedButton2.Hint:='Show Control Panel'
   end;
